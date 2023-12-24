@@ -1,19 +1,41 @@
-import { createRouter, createWebHashHistory } from "vue-router";
-import { App } from "../App";
+import { RouteRecordRaw, createRouter, createWebHashHistory } from "vue-router";
 import { WelcomePage } from "../views/WelcomePage";
+import { First } from "../components/welcome/First";
+import { Seconed } from "../components/welcome/Seconed"
+import { Thire } from "../components/welcome/Thire";
+import { Fourth } from "../components/welcome/Fourth";
 
-const routes = [
+const routes:RouteRecordRaw[] = [
   { 
     path: '/', 
-    component: App,
+    redirect:"/welcome"
+  },
+  {
+    path: '/welcome', 
+    component:WelcomePage,
+    redirect:"/welcome/1",
     children:[
-      {path: 'welcome', component: WelcomePage},
+      {
+        path:"1",
+        component:First
+      },
+      {
+        path:"2",
+        component:Seconed
+      },
+      {
+        path:"3",
+        component:Thire
+      },
+      {
+        path:"4",
+        component:Fourth
+      }
     ]
   },
 ]
 
 export const router = createRouter({
-  // 4. 内部提供了 history 模式的实现。为了简单起见，我们在这里使用 hash 模式。
   history: createWebHashHistory(),
-  routes, // `routes: routes` 的缩写
+  routes,
 })

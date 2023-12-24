@@ -4,8 +4,6 @@ import { RouterView } from "vue-router";
 export const App = defineComponent({
   setup(){
     return () => 
-    <div>
-      <RouterView></RouterView>
-    </div>
+    <RouterView></RouterView>
   }
 })
