@@ -33,6 +33,10 @@ const routes:RouteRecordRaw[] = [
       }
     ]
   },
+  {
+    path:"/start",
+    redirect:"/welcome/1"
+  }
 ]
 
 export const router = createRouter({
