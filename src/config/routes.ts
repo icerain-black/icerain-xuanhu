@@ -1,5 +1,5 @@
 import { RouteRecordRaw, createRouter, createWebHashHistory } from "vue-router";
-import { WelcomePage } from "../views/WelcomePage";
+import { Welcome } from "../views/Welcome";
 import { First } from "../components/welcome/First";
 import { Seconed } from "../components/welcome/Seconed"
 import { Thire } from "../components/welcome/Thire";
@@ -12,7 +12,7 @@ const routes:RouteRecordRaw[] = [
   },
   {
     path: '/welcome', 
-    component:WelcomePage,
+    component:Welcome,
     redirect:"/welcome/1",
     children:[
       {
