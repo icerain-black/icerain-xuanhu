@@ -8,7 +8,7 @@ import { Fourth } from "../components/welcome/Fourth";
 const routes:RouteRecordRaw[] = [
   { 
     path: '/', 
-    redirect:"/welcome"
+    redirect:"/welcome/1"
   },
   {
     path: '/welcome', 
