@@ -1,7 +1,7 @@
 import { RouteRecordRaw, createRouter, createWebHashHistory } from "vue-router";
 import { Welcome } from "../views/Welcome";
 import { First } from "../components/welcome/First";
-import { Seconed } from "../components/welcome/Seconed"
+import { Second } from "../components/welcome/Second"
 import { Thire } from "../components/welcome/Thire";
 import { Fourth } from "../components/welcome/Fourth";
 
@@ -21,7 +21,7 @@ const routes:RouteRecordRaw[] = [
       },
       {
         path:"2",
-        component:Seconed
+        component:Second
       },
       {
         path:"3",

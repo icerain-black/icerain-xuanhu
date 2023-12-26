@@ -31,7 +31,7 @@
     justify-content: space-between;
     align-items: center;
     font-size: 32px;
-    padding: calc(24px + var(--welcome-nav-gap)) 16px;
+    padding: calc(24px + var(--welcome-nav-gap)) 16px calc(24px + var(--welcome-nav-gap) + 8px);
     color: var(--welcome-text);
     height: var(--welcome-nav-height);
     > .fake{visibility: hidden;}
