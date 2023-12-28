@@ -1,9 +1,11 @@
-import { Transition, VNode, defineComponent } from "vue";
+import { Transition, VNode, defineComponent, ref } from "vue";
 import { RouteLocationNormalizedLoaded, RouterView } from "vue-router";
 import s from "./Welcome.module.scss"
-import mangosteem from "../assets/icons/mangosteen.svg"
+import { useSwiper } from "../hooks/useSwiper";
 export const Welcome = defineComponent({
   setup() {
+    const ref_main = ref()
+    useSwiper(ref_main)
     return () => {
       return (
         <div class={s.wrapper}>
@@ -13,7 +15,7 @@ export const Welcome = defineComponent({
             </svg>
             <h1>山竹记账</h1>
           </header>
-          <main class={s.main}>
+          <main class={s.main} ref={ref_main}>
             <RouterView name="main">
               {({Component:X,route:R}:{Component: VNode;route: RouteLocationNormalizedLoaded;}) => (
                 <Transition 
