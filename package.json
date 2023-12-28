@@ -11,7 +11,9 @@
   "dependencies": {
     "sass": "1.49.11",
     "vue": "3.2.31",
-    "vue-router": "4.0.14"
+    "vue-router": "4.0.14",
+    "svgo": "2.8.0",
+    "svgstore": "3.0.1"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "2.3.1",

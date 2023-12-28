@@ -6,7 +6,7 @@ export const Thire = defineComponent({
     return () => (
       <WelcomeLayout>
         {{
-          icon:() => <img src={chart}/>,
+          icon:() => <svg><use xlinkHref='#chart'></use></svg>,
           title:() => <h2>数据可视化<br/>收支一目了然</h2>
         }}
       </WelcomeLayout>
