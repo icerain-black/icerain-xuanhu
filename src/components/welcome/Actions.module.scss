@@ -1,0 +1,16 @@
+.wrapper{
+  display: flex;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100vw;
+  z-index: var(--welcome-z-index-nav);
+  background-color: var(--welcome-bg-end);
+  justify-content: space-between;
+  align-items: center;
+  font-size: 32px;
+  padding: calc(24px + var(--welcome-nav-gap)) 16px calc(24px + var(--welcome-nav-gap) + 8px);
+  color: var(--welcome-text);
+  height: var(--welcome-nav-height);
+  > .fake{visibility: hidden;}
+}

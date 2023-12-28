@@ -1,7 +1,5 @@
 import { defineComponent } from 'vue';
-import s from './WelcomeLayout.module.scss';
 import cloud from '../../assets/icons/cloud.svg';
-import { RouterLink } from 'vue-router';
 import { WelcomeLayout } from './WelcomeLayout';
 export const Fourth = defineComponent({
   setup: (props, context) => {
@@ -10,11 +8,6 @@ export const Fourth = defineComponent({
         {{
           icon:() => <img src={cloud} />,
           title:() => <h2>云备份<br/>再也不怕数据丢失</h2>,
-          default:() => <>
-            <RouterLink class={s.fake} to="/start" >跳过</RouterLink>
-            <RouterLink to="/start" >开始记账</RouterLink>
-            <RouterLink class={s.fake} to="/start" >跳过</RouterLink>
-          </>
         }}
       </WelcomeLayout>
     )

@@ -4,6 +4,10 @@ import { First } from "../components/welcome/First";
 import { Second } from "../components/welcome/Second"
 import { Thire } from "../components/welcome/Thire";
 import { Fourth } from "../components/welcome/Fourth";
+import { FirstActions } from "../components/welcome/FirstActions";
+import { SecondActions } from "../components/welcome/SecondActions";
+import { ThireActions } from "../components/welcome/ThireActions";
+import { FourthActions } from "../components/welcome/FourthActions";
 
 const routes:RouteRecordRaw[] = [
   { 
@@ -17,19 +21,31 @@ const routes:RouteRecordRaw[] = [
     children:[
       {
         path:"1",
-        component:First
+        components:{
+          main:First,
+          actions:FirstActions
+        }
       },
       {
         path:"2",
-        component:Second
+        components:{
+          main:Second,
+          actions:SecondActions
+        }
       },
       {
         path:"3",
-        component:Thire
+        components:{
+          main:Thire,
+          actions:ThireActions
+        }
       },
       {
         path:"4",
-        component:Fourth
+        components:{
+          main:Fourth,
+          actions:FourthActions
+        }
       }
     ]
   },
