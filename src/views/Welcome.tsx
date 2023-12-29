@@ -1,11 +1,30 @@
-import { Transition, VNode, defineComponent, ref } from "vue";
-import { RouteLocationNormalizedLoaded, RouterView } from "vue-router";
+import { Transition, VNode, defineComponent, ref, watchEffect } from "vue";
+import { RouteLocationNormalizedLoaded, RouterView, useRoute, useRouter } from "vue-router";
 import s from "./Welcome.module.scss"
 import { useSwiper } from "../hooks/useSwiper";
+
+const routerMap:Record<string,string> = {
+  "Welcome1":"/welcome/2",
+  "Welcome2":"/welcome/3",
+  "Welcome3":"/welcome/4",
+  "Welcome4":"/start",
+} 
 export const Welcome = defineComponent({
   setup() {
+    const route = useRoute()
+    const router = useRouter()
+    
     const ref_main = ref()
-    useSwiper(ref_main)
+    const pushRouter = () => {      
+      if (!isSwiping.value && realDirection.value === "left") {
+        let name = (route.name || "Welcome1").toString()
+        router.replace(routerMap[name])
+      }
+    }
+    let {isSwiping,realDirection} = useSwiper(ref_main,{
+      afterEnd:pushRouter
+    })
+   
     return () => {
       return (
         <div class={s.wrapper}>

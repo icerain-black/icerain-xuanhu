@@ -24,28 +24,32 @@ const routes:RouteRecordRaw[] = [
         components:{
           main:First,
           actions:FirstActions
-        }
+        },
+        name:"Welcome1"
       },
       {
         path:"2",
         components:{
           main:Second,
           actions:SecondActions
-        }
+        },
+        name:"Welcome2"
       },
       {
         path:"3",
         components:{
           main:Thire,
           actions:ThireActions
-        }
+        },
+        name:"Welcome3"
       },
       {
         path:"4",
         components:{
           main:Fourth,
           actions:FourthActions
-        }
+        },
+        name:"Welcome4"
       }
     ]
   },
