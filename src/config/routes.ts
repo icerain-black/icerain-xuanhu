@@ -8,6 +8,7 @@ import { FirstActions } from "../components/welcome/FirstActions";
 import { SecondActions } from "../components/welcome/SecondActions";
 import { ThireActions } from "../components/welcome/ThireActions";
 import { FourthActions } from "../components/welcome/FourthActions";
+import { StartPage } from "../views/StartPage";
 
 const routes:RouteRecordRaw[] = [
   { 
@@ -55,7 +56,7 @@ const routes:RouteRecordRaw[] = [
   },
   {
     path:"/start",
-    redirect:"/welcome/1"
+    component:StartPage
   }
 ]
 
