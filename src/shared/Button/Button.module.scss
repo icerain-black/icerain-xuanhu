@@ -1,0 +1,13 @@
+.wrapper{
+  padding: 16px;
+  >.button{
+    border: none;
+    padding: 8px 16px;
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    width: 100%;
+    font-size: var(--button-font-size);
+    border-radius: var(--button-border-radius);
+    height: var(--button-height);
+  }
+}
