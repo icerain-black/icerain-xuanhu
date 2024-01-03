@@ -1,0 +1,13 @@
+.center_wrapper{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &.horizontal{
+    flex-direction: row;
+  }
+
+  &.vertical{
+    flex-direction: column;
+  }
+}
