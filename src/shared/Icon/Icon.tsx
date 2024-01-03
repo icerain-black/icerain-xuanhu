@@ -2,7 +2,7 @@ import {PropType, defineComponent} from "vue";
 import s from "./Icon.module.scss"
 
 export interface IconProps {
-  name?:"add" | "mangosteen" | "pig" | "clock" | "chart" | "cloud"
+  name?:"add" | "mangosteen" | "pig" | "clock" | "chart" | "cloud" | "menu"
 }
 export const Icon = defineComponent({
   props:{
