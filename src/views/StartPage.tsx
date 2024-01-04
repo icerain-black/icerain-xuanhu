@@ -6,6 +6,7 @@ import { Center } from "../shared/Center/Centet";
 import { Icon } from "../shared/Icon/Icon";
 import { Navbar } from "../shared/Navbar/Navbar";
 import { Overlay } from "../shared/OverLay/Overlay";
+import { RouterLink } from "vue-router";
 export const StartPage = defineComponent({
   setup(props, ctx) {
     const refOverlayVisible = ref(false)
@@ -29,8 +30,12 @@ export const StartPage = defineComponent({
           <Center class={s.pig_wrapper}>
             <Icon name="pig" class={s.pig}></Icon>
           </Center>
-          <Button onClick={click}>测试</Button>
-          <FloatButton></FloatButton>
+          <RouterLink to="/items">
+            <Button onClick={click}>开始记账</Button>
+          </RouterLink>
+          <RouterLink to="/items">
+            <FloatButton></FloatButton>
+          </RouterLink>
           {refOverlayVisible.value &&
           <Overlay onClose={() => refOverlayVisible.value = false} />
         }

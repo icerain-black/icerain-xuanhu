@@ -1,3 +1,4 @@
+import { ItemPage } from './../views/ItemPage';
 import { RouteRecordRaw, createRouter, createWebHashHistory } from "vue-router";
 import { Welcome } from "../views/Welcome";
 import { First } from "../components/welcome/First";
@@ -9,6 +10,8 @@ import { SecondActions } from "../components/welcome/SecondActions";
 import { ThireActions } from "../components/welcome/ThireActions";
 import { FourthActions } from "../components/welcome/FourthActions";
 import { StartPage } from "../views/StartPage";
+import { ItemList } from '../components/Item/ItemList';
+import { ItemCreate } from '../components/Item/ItemCreate';
 
 const routes:RouteRecordRaw[] = [
   { 
@@ -57,6 +60,20 @@ const routes:RouteRecordRaw[] = [
   {
     path:"/start",
     component:StartPage
+  },
+  {
+    path:"/items",
+    component:ItemPage,
+    children:[
+      {
+        path:"",
+        component:ItemList
+      },
+      {
+        path:"create",
+        component:ItemCreate
+      }
+    ]
   }
 ]
 
