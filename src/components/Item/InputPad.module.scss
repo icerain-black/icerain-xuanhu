@@ -1,0 +1,25 @@
+.buttons{
+  display: flex;
+  flex-wrap: wrap;
+  border-top: 1px solid rgba($color: #000000, $alpha: 0.5);
+  >button{
+    height: 48px;
+    width: 25%;
+    text-align: center;
+    border: none;
+    border-right: 1px solid rgba($color: #000000, $alpha: 0.5) ;
+    border-bottom: 1px solid rgba($color: #000000, $alpha: 0.5);
+    background-color: transparent;
+
+    &:nth-of-type(4n){
+      border-right: none;
+    }
+
+    &:nth-of-type(13),
+    &:nth-of-type(14),
+    &:nth-of-type(15),
+    &:nth-of-type(16){
+      border-bottom: none;
+    }
+  }
+}
