@@ -2,6 +2,7 @@ import { defineConfig } from 'vite'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import vue from '@vitejs/plugin-vue'
 import {svgstore} from "./src/vite_plugins/svgstore"
+import styleImport, { VantResolve } from 'vite-plugin-style-import';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
@@ -10,6 +11,9 @@ export default defineConfig({
       transformOn: true,
       mergeProps: true
     }),
-    svgstore()
+    svgstore(),
+    styleImport({
+      resolves: [VantResolve()],
+    }),
   ],
 })
