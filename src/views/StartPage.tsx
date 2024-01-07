@@ -27,7 +27,7 @@ export const StartPage = defineComponent({
                 <Icon name="pig" class={s.pig}></Icon>
               </Center>
               <RouterLink to="/items">
-                <Button onClick={click}>开始记账</Button>
+                <Button onClick={click} class={s.button}>开始记账</Button>
               </RouterLink>
               <RouterLink to="/items">
                 <FloatButton></FloatButton>
