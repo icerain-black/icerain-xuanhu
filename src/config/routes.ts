@@ -12,6 +12,9 @@ import { FourthActions } from "../components/welcome/FourthActions";
 import { StartPage } from "../views/StartPage";
 import { ItemList } from '../components/Item/ItemList';
 import { ItemCreate } from '../components/Item/ItemCreate';
+import { TagPage } from '../views/TagPage';
+import { TagCreate } from '../components/tags/TagCreate';
+import { TagEdit } from '../components/tags/TagEdit';
 
 const routes:RouteRecordRaw[] = [
   { 
@@ -72,6 +75,20 @@ const routes:RouteRecordRaw[] = [
       {
         path:"create",
         component:ItemList
+      }
+    ]
+  },
+  {
+    path:"/tags",
+    component:TagPage,
+    children:[
+      {
+        path:"create",
+        component:TagCreate
+      },
+      {
+        path:":id",
+        component:TagEdit
       }
     ]
   }
