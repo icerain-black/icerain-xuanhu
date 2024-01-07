@@ -32,10 +32,10 @@
   grid-auto-rows: 48px;
   grid-auto-columns: 1fr;
   gap: 1px;
-  background: var(--inputpad_button_color);
-  border-top: 1px solid var(--inputpad_button_color);
+  background: var(--inputpad_border_color);
+  border-top: 1px solid var(--inputpad_border_color);
   >button{
-    background: var(--button-bg);
+    background: var(--inputpad-bg-color);
     border: none;
     &:nth-child(1) {
       grid-area: n1;
@@ -75,8 +75,8 @@
     }
     &:nth-child(13) {
       grid-area: s;
-      background: var(--button-bg-important);
-      color: var(--button-text-important);
+      background: var(--inputpad-button-bg-important);
+      color: var(--inputpad-button-text-important);
     }
   }
 }
