@@ -4,25 +4,29 @@ import { MainLayout } from "../../shared/MainLayout/MainLayout";
 import { Icon } from "../../shared/Icon/Icon";
 import { Button } from "../../shared/Button/Button";
 import { EmojiSelect } from "../../shared/EmojiSelect/EmojiSelect";
+import { validata,Rules, FormError } from "../../shared/validate/validata";
 export const TagCreate = defineComponent({
   setup(props, ctx) {
     const formData = reactive({
       name: '',
-      sign: 'x',
+      sign: '',
     })
 
-    const errors = reactive({
-    })
+    let errors:FormError<typeof formData> = reactive({})
 
-    const rules = [
-      {key:"name",require:true,message:"必填"},
-      {key:"name",pattern:/^.{1,4}$/,message:"只能1~4个字符"},
-      {key:"sign",require:true,message:"必填"}
+    const rules:Rules<typeof formData> = [
+      {key:"name",type:"require",require:true,message:"必填"},
+      {key:"name",type:"pattern",exp:/^.{1,4}$/,message:"只能1~4个字符"},
+      {key:"sign",type:"require",require:true,message:"必填"}
     ]
     const formSubmit = (e:Event) => {
       e.preventDefault()
-      let value = toRaw(formData)
-      // errors = validata(value,rules)
+      let raw_formData = toRaw(formData)
+      Object.assign(errors,{
+        name:[],
+        sign:[]
+      })
+      Object.assign(errors,validata(raw_formData,rules))
     }
     
     return () => {
@@ -44,7 +48,7 @@ export const TagCreate = defineComponent({
                       />
                     </div>
                     <div class={s.formItem_errorHint}>
-                      <span>必填</span>
+                      <span>{errors["name"]?.[0] ?? "　"}</span>
                     </div>
                   </label>
                 </div>
@@ -55,7 +59,7 @@ export const TagCreate = defineComponent({
                       <EmojiSelect v-model:emoji={formData.sign} class={[s.formItem, s.emojiList, s.error]}/>
                     </div>
                     <div class={s.formItem_errorHint}>
-                      <span>必填</span>
+                      <span>{errors["sign"]?.[0] ?? "　"}</span>
                     </div>
                   </label>
                 </div>
@@ -73,3 +77,4 @@ export const TagCreate = defineComponent({
     };
   },
 });
+
