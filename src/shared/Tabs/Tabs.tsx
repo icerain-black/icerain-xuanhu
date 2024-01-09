@@ -16,13 +16,13 @@ export const Tabs = defineComponent({
         }
       }
       return (
-        <>
+        <div>
           <div class={s.tabs}>
             <ol>
               {
                 nodeArr.map(item => 
                   <li 
-                    class={props.selected === item.props?.kind ? s.selected : null}
+                    class={props.selected === item.props?.kind && s.selected}
                     onClick={() => ctx.emit("update:selected",item.props?.kind)}
                   >
                     {item.props?.kind}
@@ -34,7 +34,7 @@ export const Tabs = defineComponent({
           <div class={s.tab}>
             {nodeArr.find(item => props.selected === item.props?.kind)}
           </div>
-        </>
+        </div>
       )
     }
   },

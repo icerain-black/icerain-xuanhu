@@ -1,4 +1,8 @@
 .tabs{
+  position: relative;
+  position: sticky;
+  z-index: 1;
+  top: 0;
   ol{
     display: flex;
     justify-content: space-between;
@@ -10,8 +14,8 @@
       flex-shrink: 0;
       padding: 12px 0;
       background-color: var(--navbar-bg-end);
+      position: relative;
       &.selected{
-        position: relative;
         &::after{
           background-color: var(--tabs-indicator-bg);
         }
