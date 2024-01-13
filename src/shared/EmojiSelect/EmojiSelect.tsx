@@ -45,7 +45,7 @@ export const EmojiSelect = defineComponent({
     const emojis = computed(() => {
       return table[refSelected.value][1].map(category =>
         emojiList.find(item => item[0] === category)?.[1]
-          .map(item => <li onClick={() => emojiClick(item)}>{item}</li>)
+          .map(item => <li onClick={() => emojiClick(item)} class={[props.emoji === item && s.selected]}>{item}</li>)
       )
     }) 
     return () => (

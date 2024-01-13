@@ -41,6 +41,11 @@
       flex-grow: 0;
       width: 10%;
       text-align: center;
+      border: transparent 1px solid;
+      border-radius: 6px;
+      &.selected{
+        border-color: var(--emoji-selected);
+      }
     }
   }
 }
