@@ -43,7 +43,7 @@ export const TagCreate = defineComponent({
                     <div class={s.formItem_value}>
                       <input
                         v-model={formData.name}
-                        class={[s.formItem, s.input, s.error]}
+                        class={[s.formItem, s.input, errors.name?.[0] && s.error]}
                         type="text"
                       />
                     </div>
@@ -56,7 +56,7 @@ export const TagCreate = defineComponent({
                   <label class={s.formLabel}>
                     <span class={s.formItem_name}>符号 {formData.sign}</span>
                     <div class={s.formItem_value}>
-                      <EmojiSelect v-model:emoji={formData.sign} class={[s.formItem, s.emojiList, s.error]}/>
+                      <EmojiSelect v-model:emoji={formData.sign} error={errors.sign?.[0] ? true : false} class={[s.formItem, s.emojiList]}/>
                     </div>
                     <div class={s.formItem_errorHint}>
                       <span>{errors["sign"]?.[0] ?? "　"}</span>

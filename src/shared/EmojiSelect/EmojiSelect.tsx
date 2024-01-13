@@ -5,6 +5,10 @@ export const EmojiSelect = defineComponent({
   props: {
     emoji: {
       type: String as PropType<string>
+    },
+    error:{
+      type: Boolean,
+      default:false
     }
   },
   setup: (props, context) => {
@@ -45,7 +49,7 @@ export const EmojiSelect = defineComponent({
       )
     }) 
     return () => (
-      <div class={s.emojiList}>
+      <div class={[s.emojiList,props.error && s.error]}>
         <nav>
           {table.map((item,index) => <span class={refSelected.value === index && s.selected} onClick={() => navClick(index)}>{item[0]}</span>)}
         </nav>
