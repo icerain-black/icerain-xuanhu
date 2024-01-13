@@ -2,11 +2,19 @@
   >.button{
     border: none;
     padding: 8px 16px;
-    background-color: var(--button-bg);
-    color: var(--button-text);
     width: 100%;
     font-size: var(--button-font-size);
     border-radius: var(--button-border-radius);
     height: var(--button-height);
+
+    &.normal{
+      background-color: var(--button-bg);
+      color: var(--button-text);
+    }
+
+    &.danger{
+      background-color: var(--button-bg-danger);
+      color: var(--button-text-danger);
+    }
   }
 }
