@@ -70,11 +70,11 @@ const routes:RouteRecordRaw[] = [
     children:[
       {
         path:"",
-        component:ItemCreate
+        component:ItemList
       },
       {
         path:"create",
-        component:ItemList
+        component:ItemCreate
       }
     ]
   },
