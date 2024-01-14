@@ -25,7 +25,7 @@ export class Time {
   }
 
   getFirstDayOfMonth() {
-    return new Date(
+    return new Time(new Date(
       this.date.getFullYear(),
       this.date.getMonth(),
       1,
@@ -33,15 +33,15 @@ export class Time {
       0,
       0,
       0
-    );
+    ));
   }
 
   getFirstDayOfYear() {
-    return new Date(this.date.getFullYear(), 0, 1, 0, 0, 0, 0);
+    return new Time(new Date(this.date.getFullYear(), 0, 1, 0, 0, 0, 0));
   }
 
   getLastDayOfMonth() {
-    return new Date(
+    return new Time(new Date(
       this.date.getFullYear(),
       this.date.getMonth() + 1,
       0,
@@ -49,11 +49,11 @@ export class Time {
       0,
       0,
       0
-    );
+    ));
   }
 
   getLastDayOfYear() {
-    return new Date(this.date.getFullYear() + 1, 0, 0, 0, 0, 0, 0);
+    return new Time(new Date(this.date.getFullYear() + 1, 0, 0, 0, 0, 0, 0));
   }
 
   add(
@@ -97,6 +97,6 @@ export class Time {
       default:
         break;
     }
-    return date
+    return new Time(date)
   }
 }
