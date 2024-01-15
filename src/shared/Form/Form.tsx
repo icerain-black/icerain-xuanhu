@@ -1,6 +1,8 @@
-import {PropType, computed, defineComponent} from "vue";
+import {PropType, computed, defineComponent, ref} from "vue";
 import s from "./Form.module.scss"
 import { EmojiSelect } from "../EmojiSelect/EmojiSelect";
+import { DatetimePicker, Popup } from "vant";
+import { Time } from "../time/time";
 export const Form = defineComponent({
   props:{
     onSubmit:{
@@ -28,20 +30,19 @@ export const FormItem = defineComponent({
       type:String as PropType<string>,
     },
     type:{
-      type:String as PropType<"text" | "emojiSelect" | undefined>,
+      type:String as PropType<"text" | "emojiSelect" | undefined | "date">,
     },
     label:{
       type:String
     }
   },
   setup(props, ctx) {
-
+    const refDateVisible = ref(false)
     const items = computed(() => {
       switch (props.type) {
         case "text":
           return (
             <>
-              <span class={s.formItem_name}>{props.label}</span>
               <div class={s.formItem_value}>
                 <input
                   value={props.value}
@@ -58,7 +59,6 @@ export const FormItem = defineComponent({
         case "emojiSelect":
           return (
             <>
-              <span class={s.formItem_name}>{props.label}</span>
               <div class={s.formItem_value}>
                 <EmojiSelect
                   emoji={props.value}
@@ -72,6 +72,24 @@ export const FormItem = defineComponent({
               </div>
             </>
           )
+
+        case "date":
+          return (
+            <div class={s.formItem_value}>
+              <input readonly={true} value={props.value}
+              onClick={() => { refDateVisible.value = true }}
+              class={[s.formItem, s.input]} />
+              <Popup position='bottom' v-model:show={refDateVisible.value}>
+                <DatetimePicker value={props.value} type="date" title="选择年月日"
+                  onConfirm={(date: Date) => {
+                    ctx.emit('update:value', new Time(date).format())
+                    refDateVisible.value = false
+                  }}
+                  onCancel={() => refDateVisible.value = false} />
+              </Popup>
+            </div>
+          )
+
         case undefined:
           return ctx.slots.default?.()
         default:
@@ -82,6 +100,7 @@ export const FormItem = defineComponent({
       return (
         <div class={s.formRow}>
           <label class={s.formLabel}>
+            {props.label && <span class={s.formItem_name}>{props.label}</span>}
             {items.value}
           </label>
         </div>
