@@ -14,12 +14,13 @@ export const TagCreate = defineComponent({
             icon: () => <Icon name="left" onClick={() => {}}></Icon>,
             default: () => (
               <>
-                <TagFrom></TagFrom>
-                <div class={s.buttons}>
-                  <div class={s.main}>
-                    <Button class={[s.formItem, s.button]}>确定</Button>
+                <TagFrom>
+                  <div class={s.buttons}>
+                    <div class={s.main}>
+                      <Button class={[s.formItem, s.button]}>确定</Button>
+                    </div>
                   </div>
-                </div>
+                </TagFrom>
               </>
             ),
           }}
