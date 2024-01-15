@@ -9,6 +9,9 @@ export const EmojiSelect = defineComponent({
     error:{
       type: Boolean,
       default:false
+    },
+    updateEmoji:{
+      type:Function as PropType<(emoji:string) => void>
     }
   },
   setup: (props, context) => {
@@ -39,7 +42,7 @@ export const EmojiSelect = defineComponent({
     }
 
     const emojiClick = (emoji:string) => {
-      context.emit("update:emoji",emoji)
+      props.updateEmoji?.(emoji)
     }
 
     const emojis = computed(() => {

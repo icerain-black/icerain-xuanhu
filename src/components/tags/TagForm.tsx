@@ -1,7 +1,7 @@
 import { defineComponent, reactive, toRaw } from "vue";
 import s from "./TagForm.module.scss";
-import { EmojiSelect } from "../../shared/EmojiSelect/EmojiSelect";
 import { FormError, Rules, validata } from "../../shared/validate/validata";
+import { Form, FormItem } from "../../shared/Form/Form";
 export const TagFrom = defineComponent({
   setup(props, ctx) {
     const formData = reactive({
@@ -27,39 +27,16 @@ export const TagFrom = defineComponent({
     }
     return () => {
       return (
-        <form class={s.form} onSubmit={formSubmit}>
-          <div class={s.formRow}>
-            <label class={s.formLabel}>
-              <span class={s.formItem_name}>标签名</span>
-              <div class={s.formItem_value}>
-                <input
-                  v-model={formData.name}
-                  class={[s.formItem, s.input, errors.name?.[0] && s.error]}
-                  type="text"
-                />
-              </div>
-              <div class={s.formItem_errorHint}>
-                <span>{errors["name"]?.[0] ?? "　"}</span>
-              </div>
-            </label>
-          </div>
-          <div class={s.formRow}>
-            <label class={s.formLabel}>
-              <span class={s.formItem_name}>符号 {formData.sign}</span>
-              <div class={s.formItem_value}>
-                <EmojiSelect
-                  v-model:emoji={formData.sign}
-                  error={errors.sign?.[0] ? true : false}
-                  class={[s.formItem, s.emojiList]}
-                />
-              </div>
-              <div class={s.formItem_errorHint}>
-                <span>{errors["sign"]?.[0] ?? "　"}</span>
-              </div>
-            </label>
-          </div>
-          <p class={s.tips}>记账时长按标签，即可进行编辑</p>
-        </form>
+        <Form onSubmit={formSubmit}>
+          <FormItem type="text" v-model:value={formData.name} error={errors.name?.[0]} />
+          <FormItem type="emojiSelect" v-model:value={formData.sign} error={errors.sign?.[0]} />
+          <FormItem>
+            <p class={s.tips}>记账时长按标签，即可进行编辑</p>
+          </FormItem>
+          <FormItem>
+            {ctx.slots.default?.()}
+          </FormItem>
+        </Form>
       );
     };
   },
