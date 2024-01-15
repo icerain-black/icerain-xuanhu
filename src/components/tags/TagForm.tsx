@@ -28,8 +28,8 @@ export const TagFrom = defineComponent({
     return () => {
       return (
         <Form onSubmit={formSubmit}>
-          <FormItem type="text" v-model:value={formData.name} error={errors.name?.[0]} />
-          <FormItem type="emojiSelect" v-model:value={formData.sign} error={errors.sign?.[0]} />
+          <FormItem label="标签名" type="text" v-model:value={formData.name} error={errors.name?.[0]} />
+          <FormItem label={`表情 ${formData.sign}`} type="emojiSelect" v-model:value={formData.sign} error={errors.sign?.[0]} />
           <FormItem>
             <p class={s.tips}>记账时长按标签，即可进行编辑</p>
           </FormItem>

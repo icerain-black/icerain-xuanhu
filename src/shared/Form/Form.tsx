@@ -29,6 +29,9 @@ export const FormItem = defineComponent({
     },
     type:{
       type:String as PropType<"text" | "emojiSelect" | undefined>,
+    },
+    label:{
+      type:String
     }
   },
   setup(props, ctx) {
@@ -37,25 +40,25 @@ export const FormItem = defineComponent({
       switch (props.type) {
         case "text":
           return (
-            <label class={s.formLabel}>
-            <span class={s.formItem_name}>标签名</span>
-            <div class={s.formItem_value}>
-              <input
-                value={props.value}
-                onInput={(e) => ctx.emit("update:value",(e.target as HTMLInputElement)?.value)}
-                class={[s.formItem, s.input, props.error && s.error]}
-                type="text"
-              />
-            </div>
-            <div class={s.formItem_errorHint}>
-              <span>{props.error || "　"}</span>
-            </div>
-          </label>
+            <>
+              <span class={s.formItem_name}>{props.label}</span>
+              <div class={s.formItem_value}>
+                <input
+                  value={props.value}
+                  onInput={(e) => ctx.emit("update:value",(e.target as HTMLInputElement)?.value)}
+                  class={[s.formItem, s.input, props.error && s.error]}
+                  type="text"
+                />
+              </div>
+              <div class={s.formItem_errorHint}>
+                <span>{props.error || "　"}</span>
+              </div>
+            </>
           )
         case "emojiSelect":
           return (
-            <label class={s.formLabel}>
-              <span class={s.formItem_name}>符号 {props.value}</span>
+            <>
+              <span class={s.formItem_name}>{props.label}</span>
               <div class={s.formItem_value}>
                 <EmojiSelect
                   emoji={props.value}
@@ -67,7 +70,7 @@ export const FormItem = defineComponent({
               <div class={s.formItem_errorHint}>
                 <span>{props.error || "　"}</span>
               </div>
-            </label>
+            </>
           )
         case undefined:
           return ctx.slots.default?.()
@@ -78,7 +81,9 @@ export const FormItem = defineComponent({
     return () => {
       return (
         <div class={s.formRow}>
-          {items.value}
+          <label class={s.formLabel}>
+            {items.value}
+          </label>
         </div>
       )
     }
