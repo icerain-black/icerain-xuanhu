@@ -6,6 +6,7 @@ export const Tabs = defineComponent({
       type:String
     },
   },
+  emits:["update:selected"],
   setup(props, ctx) {
     return () => {
       let nodeArr = ctx.slots.default?.()
