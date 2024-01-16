@@ -4,7 +4,7 @@ import { Button } from "../shared/Button/Button";
 import { FloatButton } from "../shared/FloatButton/FloatButton";
 import { Center } from "../shared/Center/Centet";
 import { Icon } from "../shared/Icon/Icon";
-import { Overlay } from "../shared/OverLay/Overlay";
+import { Overlay, OverlayIcon } from "../shared/OverLay/Overlay";
 import { RouterLink } from "vue-router";
 import { MainLayout } from "../shared/MainLayout/MainLayout";
 export const StartPage = defineComponent({
@@ -20,7 +20,7 @@ export const StartPage = defineComponent({
       return (
         <MainLayout class={s.start_page}>
           {{
-            icon:() => <Icon name="menu" class={s.navIcon} onClick={onClickMenu}></Icon>,
+            icon:() => <OverlayIcon></OverlayIcon>,
             title:() => "山竹记账",
             default:() => <>
               <Center class={s.pig_wrapper}>
@@ -32,9 +32,7 @@ export const StartPage = defineComponent({
               <RouterLink to="/items">
                 <FloatButton></FloatButton>
               </RouterLink>
-              {refOverlayVisible.value && (
-                <Overlay onClose={() => (refOverlayVisible.value = false)} />
-              )}
+              
             </>
           }}
         </MainLayout>

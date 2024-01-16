@@ -8,6 +8,7 @@ import { Time } from "../../shared/time/time";
 import { Overlay } from "vant";
 import { Form, FormItem } from "../../shared/Form/Form";
 import { Button } from "../../shared/Button/Button";
+import { OverlayIcon } from "../../shared/OverLay/Overlay";
 export const ItemList = defineComponent({
   setup(props, ctx) {
     const customTime = reactive({
@@ -42,7 +43,7 @@ export const ItemList = defineComponent({
         <MainLayout>{
           {
             title:() => "山竹记账",
-            icon:() => <Icon name="menu"></Icon>,
+            icon:() => <OverlayIcon></OverlayIcon>,
             default:() => (
               <>
               <Tabs v-model:selected={ref_selected.value} onUpdate:selected={(kind) => { if(kind === "自定义时间") refOverlayVisible.value = true}}>
