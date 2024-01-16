@@ -3,6 +3,7 @@ import s from "./Form.module.scss"
 import { EmojiSelect } from "../EmojiSelect/EmojiSelect";
 import { DatetimePicker, Popup } from "vant";
 import { Time } from "../time/time";
+import { Button } from "../Button/Button";
 export const Form = defineComponent({
   props:{
     onSubmit:{
@@ -30,11 +31,14 @@ export const FormItem = defineComponent({
       type:String as PropType<string>,
     },
     type:{
-      type:String as PropType<"text" | "emojiSelect" | undefined | "date">,
+      type:String as PropType<"text" | "emojiSelect" | undefined | "date" | "validationCode">,
     },
     label:{
       type:String
-    }
+    },
+    placeholder:{
+      type:String
+    },
   },
   setup(props, ctx) {
     const refDateVisible = ref(false)
@@ -49,6 +53,7 @@ export const FormItem = defineComponent({
                   onInput={(e) => ctx.emit("update:value",(e.target as HTMLInputElement)?.value)}
                   class={[s.formItem, s.input, props.error && s.error]}
                   type="text"
+                  placeholder={props.placeholder}
                 />
               </div>
               <div class={s.formItem_errorHint}>
@@ -77,6 +82,7 @@ export const FormItem = defineComponent({
           return (
             <div class={s.formItem_value}>
               <input readonly={true} value={props.value}
+              placeholder={props.placeholder}
               onClick={() => { refDateVisible.value = true }}
               class={[s.formItem, s.input]} />
               <Popup position='bottom' v-model:show={refDateVisible.value}>
@@ -89,6 +95,22 @@ export const FormItem = defineComponent({
               </Popup>
             </div>
           )
+
+        case "validationCode":
+          return <>
+            <div class={s.formItem_value}>
+              <input type="text" 
+                value={props.value}
+                placeholder={props.placeholder}
+                onInput={(e) => ctx.emit("update:value",(e.target as HTMLInputElement)?.value)} 
+                class={[s.formItem, s.input, props.error && s.error,s.validationInput]}
+              />
+              <Button class={[s.formItem, s.button, props.error && s.error,s.validationButton]}>发送验证码</Button>
+            </div>
+            <div class={s.formItem_errorHint}>
+              <span>{props.error || "　"}</span>
+            </div>
+          </>
 
         case undefined:
           return ctx.slots.default?.()
