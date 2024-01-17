@@ -31,7 +31,7 @@ export const FormItem = defineComponent({
       type:String as PropType<string>,
     },
     type:{
-      type:String as PropType<"text" | "emojiSelect" | undefined | "date" | "validationCode">,
+      type:String as PropType<"text" | "emojiSelect" | undefined | "date" | "validationCode" | 'select'>,
     },
     label:{
       type:String
@@ -39,6 +39,7 @@ export const FormItem = defineComponent({
     placeholder:{
       type:String
     },
+    options: Array as PropType<Array<{ value: string, text: string }>>
   },
   setup(props, ctx) {
     const refDateVisible = ref(false)
@@ -111,7 +112,14 @@ export const FormItem = defineComponent({
               <span>{props.error || "　"}</span>
             </div>
           </>
-
+        case 'select':
+          return (
+            <select class={[s.formItem, s.select]} value={props.value}
+                onChange={(e: any) => { ctx.emit('update:value', e.target.value) }}>
+                {props.options?.map(option =>
+                  <option value={option.value}>{option.text}</option>
+                )}
+              </select>)            
         case undefined:
           return ctx.slots.default?.()
         default:
