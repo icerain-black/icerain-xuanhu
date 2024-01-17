@@ -16,6 +16,7 @@ import { TagPage } from '../views/TagPage';
 import { TagCreate } from '../components/tags/TagCreate';
 import { TagEdit } from '../components/tags/TagEdit';
 import { SignInPage } from '../views/SignInPage';
+import { StatisticsPage } from '../views/StatisticsPage';
 
 const routes:RouteRecordRaw[] = [
   { 
@@ -96,6 +97,10 @@ const routes:RouteRecordRaw[] = [
   {
     path:"/sign_in",
     component:SignInPage  
+  },
+  {
+    path:"/statistics",
+    component:StatisticsPage
   }
 ]
 

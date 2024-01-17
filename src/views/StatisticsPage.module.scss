@@ -1,0 +1,37 @@
+.wrapper{
+  
+}
+
+.overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--overlay-mask-bg);
+  &_inner {
+    background: var(--bg);
+    width: 80vw;
+    > header {
+      background: var(--main);
+      padding: 12px 16px;
+      color: var(--dialog-header-text);
+    }
+    > main{
+
+    }
+  }
+}
+
+.actions {
+  display: flex;
+  flex-direction: row-reverse;
+  .button {
+    padding: 8px 4px;
+    button{
+      border: none;
+      background: transparent;
+      & + & {
+        margin-left: 16px;
+      }
+    }
+  }
+}
