@@ -39,7 +39,10 @@ export const FormItem = defineComponent({
     placeholder:{
       type:String
     },
-    options: Array as PropType<Array<{ value: string, text: string }>>
+    options: Array as PropType<Array<{ value: string, text: string }>>,
+    onClick:{
+      type:Function as PropType<() => void>
+    }
   },
   setup(props, ctx) {
     const refDateVisible = ref(false)
@@ -106,7 +109,7 @@ export const FormItem = defineComponent({
                 onInput={(e) => ctx.emit("update:value",(e.target as HTMLInputElement)?.value)} 
                 class={[s.formItem, s.input, props.error && s.error,s.validationInput]}
               />
-              <Button class={[s.formItem, s.button, props.error && s.error,s.validationButton]}>发送验证码</Button>
+              <Button type="button" onClick={props.onClick} class={[s.formItem, s.button, props.error && s.error,s.validationButton]}>发送验证码</Button>
             </div>
             <div class={s.formItem_errorHint}>
               <span>{props.error || "　"}</span>
