@@ -42,9 +42,27 @@ export const FormItem = defineComponent({
     options: Array as PropType<Array<{ value: string, text: string }>>,
     onClick:{
       type:Function as PropType<() => void>
+    },
+    countFrom:{
+      type:Number as PropType<number>,
+      default:60
     }
   },
   setup(props, ctx) {
+    const timer = ref<number>();
+    const countTime = ref<number>(props.countFrom)
+    const validationCodeClick = () => {
+      props.onClick?.()
+      timer.value = setInterval(() => {
+        countTime.value -= 1
+        if (countTime.value === 0) {
+          clearInterval(timer.value)
+          timer.value = undefined
+          countTime.value = props.countFrom
+        }
+      }, 1000);
+    }
+
     const refDateVisible = ref(false)
     const items = computed(() => {
       switch (props.type) {
@@ -109,7 +127,14 @@ export const FormItem = defineComponent({
                 onInput={(e) => ctx.emit("update:value",(e.target as HTMLInputElement)?.value)} 
                 class={[s.formItem, s.input, props.error && s.error,s.validationInput]}
               />
-              <Button type="button" onClick={props.onClick} class={[s.formItem, s.button, props.error && s.error,s.validationButton]}>发送验证码</Button>
+              <Button 
+                type="button" 
+                onClick={validationCodeClick} 
+                class={[s.formItem, s.button, props.error && s.error,s.validationButton]}
+                disable={!!timer.value}
+              >
+                {timer.value ? `${countTime.value}s后可再次发送` : "发送验证码"}
+              </Button>
             </div>
             <div class={s.formItem_errorHint}>
               <span>{props.error || "　"}</span>
@@ -129,6 +154,7 @@ export const FormItem = defineComponent({
           break;
       }
     })
+
     return () => {
       return (
         <div class={s.formRow}>

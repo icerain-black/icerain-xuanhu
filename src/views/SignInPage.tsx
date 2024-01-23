@@ -5,10 +5,11 @@ import { Button } from "../shared/Button/Button";
 import { MainLayout } from "../shared/MainLayout/MainLayout";
 import { validata } from "../shared/validate/validata";
 import s from "./SignInPage.module.scss"
+import axios from "axios";
 export const SignInPage = defineComponent({
   setup(props, ctx) {
     const formData = reactive({
-      email:"",
+      email:"616964@qq.com",
       code:""
     })
 
@@ -29,8 +30,12 @@ export const SignInPage = defineComponent({
       ]))
     }
 
-    const sendValidationCode = () => {
-      console.log(111);
+    const sendValidationCode = async() => {
+      // let data = {
+      //   email:formData.email
+      // }
+      // let result = await axios.post("/api/v1/validation_codes",data)
+      // console.log(result);
     }
 
     return () => {
@@ -58,6 +63,7 @@ export const SignInPage = defineComponent({
                     error={errors.code?.[0]}label="验证码" 
                     type="validationCode"
                     onClick={sendValidationCode}
+                    countFrom={3}
                     placeholder="请输入6位数字"
                   />
                   <FormItem style={[{paddingTop:"64px"}]}>

@@ -6,7 +6,10 @@
     font-size: var(--button-font-size);
     border-radius: var(--button-border-radius);
     height: var(--button-height);
-
+    &[disabled]{
+      opacity: 0.5;
+      cursor: none;
+    }
     &.normal{
       background-color: var(--button-bg);
       color: var(--button-text);
