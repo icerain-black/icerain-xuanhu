@@ -51,8 +51,8 @@ export const FormItem = defineComponent({
   setup(props, ctx) {
     const timer = ref<number>();
     const countTime = ref<number>(props.countFrom)
-    const validationCodeClick = () => {
-      props.onClick?.()
+
+    const startCount = () => {
       timer.value = setInterval(() => {
         countTime.value -= 1
         if (countTime.value === 0) {
@@ -62,6 +62,10 @@ export const FormItem = defineComponent({
         }
       }, 1000);
     }
+
+    ctx.expose({
+      startCount
+    })
 
     const refDateVisible = ref(false)
     const items = computed(() => {
@@ -129,7 +133,7 @@ export const FormItem = defineComponent({
               />
               <Button 
                 type="button" 
-                onClick={validationCodeClick} 
+                onClick={props.onClick} 
                 class={[s.formItem, s.button, props.error && s.error,s.validationButton]}
                 disable={!!timer.value}
               >

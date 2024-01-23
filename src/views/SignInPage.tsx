@@ -1,4 +1,4 @@
-import {defineComponent, reactive, toRaw} from "vue";
+import {defineComponent, reactive, ref, toRaw} from "vue";
 import { Icon } from "../shared/Icon/Icon";
 import { Form, FormItem } from "../shared/Form/Form";
 import { Button } from "../shared/Button/Button";
@@ -18,6 +18,8 @@ export const SignInPage = defineComponent({
       code:[]
     })
 
+    const ref_validationCode = ref<any>()
+
     const submitLogin = (e:SubmitEvent) => {
       e.preventDefault()
       Object.assign(errors,{
@@ -31,11 +33,13 @@ export const SignInPage = defineComponent({
     }
 
     const sendValidationCode = async() => {
-      // let data = {
-      //   email:formData.email
-      // }
-      // let result = await axios.post("/api/v1/validation_codes",data)
-      // console.log(result);
+      let data = {
+        email:formData.email
+      }
+      let result = await axios.post("/api/v1/validation_codes",data).catch((reason) => {
+        console.log(reason);
+      })
+      ref_validationCode.value.startCount?.()
     }
 
     return () => {
@@ -59,7 +63,8 @@ export const SignInPage = defineComponent({
                     placeholder="请输入邮箱地址"
                   />
                   <FormItem 
-                    v-model:value={formData.code} 
+                    v-model:value={formData.code}
+                    ref={ref_validationCode}
                     error={errors.code?.[0]}label="验证码" 
                     type="validationCode"
                     onClick={sendValidationCode}
