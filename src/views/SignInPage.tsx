@@ -6,6 +6,7 @@ import { MainLayout } from "../shared/MainLayout/MainLayout";
 import { validata } from "../shared/validate/validata";
 import s from "./SignInPage.module.scss"
 import { http } from "../shared/http/http";
+import { AxiosError } from "axios";
 export const SignInPage = defineComponent({
   setup(props, ctx) {
     const formData = reactive({
@@ -36,7 +37,15 @@ export const SignInPage = defineComponent({
       let data = {
         email:formData.email
       }
-      await http.post("/validation_codes",data).catch(res => console.log(res))
+      await http.post("/validation_codes",data).catch(res => {
+        if (res.response) {
+          let axiosError:AxiosError = res
+          if (axiosError.response?.status === 422) {
+            let data = (axiosError.response?.data) as Record<"errors",Record<"email" | "code",string[]>>
+            Object.assign(errors,data.errors)
+          }
+        }
+      })
       ref_validationCode.value.startCount?.()
     }
 
