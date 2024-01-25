@@ -5,7 +5,7 @@ import { Button } from "../shared/Button/Button";
 import { MainLayout } from "../shared/MainLayout/MainLayout";
 import { validata } from "../shared/validate/validata";
 import s from "./SignInPage.module.scss"
-import axios from "axios";
+import { http } from "../shared/http/http";
 export const SignInPage = defineComponent({
   setup(props, ctx) {
     const formData = reactive({
@@ -36,9 +36,7 @@ export const SignInPage = defineComponent({
       let data = {
         email:formData.email
       }
-      let result = await axios.post("/api/v1/validation_codes",data).catch((reason) => {
-        console.log(reason);
-      })
+      await http.post("validation_codes",data).catch(res => console.log(res))
       ref_validationCode.value.startCount?.()
     }
 
