@@ -36,7 +36,7 @@ export const SignInPage = defineComponent({
       let data = {
         email:formData.email
       }
-      await http.post("validation_codes",data).catch(res => console.log(res))
+      await http.post("/validation_codes",data).catch(res => console.log(res))
       ref_validationCode.value.startCount?.()
     }
 
@@ -66,7 +66,7 @@ export const SignInPage = defineComponent({
                     error={errors.code?.[0]}label="验证码" 
                     type="validationCode"
                     onClick={sendValidationCode}
-                    countFrom={3}
+                    countFrom={1}
                     placeholder="请输入6位数字"
                   />
                   <FormItem style={[{paddingTop:"64px"}]}>
