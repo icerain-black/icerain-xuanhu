@@ -40,3 +40,14 @@ export const validata = <T extends FData>(formData:T,rules:Rules<T>) => {
 
   return error
 }
+
+export const hasError = (error:Record<string,string[]>) => {
+  let result = false
+  for (const key in error) {
+    if (error[key].length > 0) {
+      result = true
+      break
+    }
+  }
+  return result
+}

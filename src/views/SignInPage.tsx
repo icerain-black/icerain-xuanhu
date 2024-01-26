@@ -3,7 +3,7 @@ import { Icon } from "../shared/Icon/Icon";
 import { Form, FormItem } from "../shared/Form/Form";
 import { Button } from "../shared/Button/Button";
 import { MainLayout } from "../shared/MainLayout/MainLayout";
-import { validata } from "../shared/validate/validata";
+import { hasError, validata } from "../shared/validate/validata";
 import s from "./SignInPage.module.scss"
 import { http } from "../shared/http/http";
 import { AxiosError } from "axios";
@@ -11,7 +11,7 @@ export const SignInPage = defineComponent({
   setup(props, ctx) {
     const formData = reactive({
       email:"616964@qq.com",
-      code:""
+      code:"123456"
     })
 
     const errors = reactive({
@@ -21,7 +21,16 @@ export const SignInPage = defineComponent({
 
     const ref_validationCode = ref<any>()
 
-    const submitLogin = (e:SubmitEvent) => {
+    const onError = (res:any) => {
+      if (res.response) {
+        let axiosError:AxiosError = res
+        if (axiosError.response?.status === 422) {
+          let data = (axiosError.response?.data) as Record<"errors",Record<"email" | "code",string[]>>
+          Object.assign(errors,data.errors)
+        }
+      }
+    }
+    const submitLogin = async (e:SubmitEvent) => {
       e.preventDefault()
       Object.assign(errors,{
         email:[],code:[]
@@ -31,21 +40,18 @@ export const SignInPage = defineComponent({
         {key:"code",type:"require",require:true,message:"必填"},
         {key:"email",type:"pattern",exp:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,message:"必须使用邮箱格式"},
       ]))
+
+      if (!hasError(errors)) {
+        let result = await http.post("/session",formData).catch(onError)
+        localStorage.setItem("jwt",result?.data.jwt)
+      }
     }
 
     const sendValidationCode = async() => {
       let data = {
         email:formData.email
       }
-      await http.post("/validation_codes",data).catch(res => {
-        if (res.response) {
-          let axiosError:AxiosError = res
-          if (axiosError.response?.status === 422) {
-            let data = (axiosError.response?.data) as Record<"errors",Record<"email" | "code",string[]>>
-            Object.assign(errors,data.errors)
-          }
-        }
-      })
+      await http.post("/validation_codes",data).catch(onError)
       ref_validationCode.value.startCount?.()
     }
 
