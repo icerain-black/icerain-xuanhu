@@ -46,6 +46,9 @@ export const FormItem = defineComponent({
     countFrom:{
       type:Number as PropType<number>,
       default:60
+    },
+    buttonSelfDisable:{
+      type:Boolean,
     }
   },
   setup(props, ctx) {
@@ -136,6 +139,7 @@ export const FormItem = defineComponent({
                 onClick={props.onClick} 
                 class={[s.formItem, s.button, props.error && s.error,s.validationButton]}
                 disable={!!timer.value}
+                selfDisable={props.buttonSelfDisable}
               >
                 {timer.value ? `${countTime.value}s后可再次发送` : "发送验证码"}
               </Button>

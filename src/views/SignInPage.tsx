@@ -77,6 +77,7 @@ export const SignInPage = defineComponent({
                     onClick={sendValidationCode}
                     countFrom={1}
                     placeholder="请输入6位数字"
+                    buttonSelfDisable={true}
                   />
                   <FormItem style={[{paddingTop:"64px"}]}>
                     <Button type="submit">登录</Button>
