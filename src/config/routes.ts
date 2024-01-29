@@ -73,12 +73,6 @@ const routes:RouteRecordRaw[] = [
   {
     path:"/items",
     component:ItemPage,
-    beforeEnter: async (to, from, next) => {
-      await http.get('/me').catch(() => {
-        next('/sign_in?return_to=' + to.path)
-      })
-      next()
-    },
     children:[
       {
         path:"",
