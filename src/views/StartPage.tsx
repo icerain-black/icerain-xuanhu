@@ -1,4 +1,4 @@
-import { defineComponent, ref } from "vue";
+import { defineComponent, onMounted, ref } from "vue";
 import s from "./StartPage.module.scss";
 import { Button } from "../shared/Button/Button";
 import { FloatButton } from "../shared/FloatButton/FloatButton";
@@ -9,6 +9,9 @@ import { RouterLink } from "vue-router";
 import { MainLayout } from "../shared/MainLayout/MainLayout";
 export const StartPage = defineComponent({
   setup(props, ctx) {
+    onMounted(() => {
+      localStorage.setItem("skipFeatures","yes")
+    })
     const refOverlayVisible = ref(false);
     const onClickMenu = () => {
       refOverlayVisible.value = !refOverlayVisible.value;
