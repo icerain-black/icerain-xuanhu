@@ -7,6 +7,7 @@ import { hasError, validata } from "../shared/validate/validata";
 import s from "./SignInPage.module.scss"
 import { http } from "../shared/http/http";
 import { AxiosError } from "axios";
+import { useRoute, useRouter } from "vue-router";
 export const SignInPage = defineComponent({
   setup(props, ctx) {
     const formData = reactive({
@@ -18,6 +19,9 @@ export const SignInPage = defineComponent({
       email:[],
       code:[]
     })
+
+    const router = useRouter()
+    const route = useRoute()
 
     const ref_validationCode = ref<any>()
 
@@ -44,6 +48,8 @@ export const SignInPage = defineComponent({
       if (!hasError(errors)) {
         let result = await http.post("/session",formData).catch(onError)
         localStorage.setItem("jwt",result?.data.jwt)
+        const returnTo = route.query.return_to?.toString()
+        router.push(returnTo || "/")
       }
     }
 
