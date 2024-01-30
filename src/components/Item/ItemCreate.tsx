@@ -1,57 +1,30 @@
-import { defineComponent, ref } from "vue";
+import { defineComponent, onMounted, ref } from "vue";
 import s from "./ItemCreate.module.scss";
 import { MainLayout } from "../../shared/MainLayout/MainLayout";
 import { Icon } from "../../shared/Icon/Icon";
 import { Tab, Tabs } from "../../shared/Tabs/Tabs";
 import { InputPad } from "./InputPad";
+import { http } from "../../shared/http/http";
 export const ItemCreate = defineComponent({
   setup(props, ctx) {
+    onMounted(async () => {
+      const res = await http.get<{resources:Tag[]}>("/tags",{
+        kind:"expenses",
+        _mock:"tagIndex"
+      })
+      ref_expensesTags.value = res.data.resources
+    })
+    const ref_expensesTags = ref<Tag[]>([]);
+    onMounted(async () => {
+      const res = await http.get<{resources:Tag[]}>("/tags",{
+        kind:"income",
+        _mock:"tagIndex"
+      })
+      ref_incomeTags.value = res.data.resources
+    })
+    const ref_incomeTags = ref<Tag[]>([]);
+    const ref_selected = ref("支出");
     return () => {
-      const ref_selected = ref("支出");
-      const ref_expensesTags = ref([
-        { id: "1", name: "餐费", sign: "¥", category: "expenses" },
-        { id: "2", name: "吃饭", sign: "¥", category: "expenses" },
-        { id: "3", name: "打车", sign: "¥", category: "expenses" },
-      ]);
-
-      const ref_incomeTags = ref([
-        { id: 4, name: "工资", sign: "￥", category: "income" },
-        { id: 5, name: "彩票", sign: "￥", category: "income" },
-        { id: 6, name: "滴滴", sign: "￥", category: "income" },
-        { id: 11, name: "彩票", sign: "￥", category: "income" },
-        { id: 18, name: "滴滴", sign: "￥", category: "income" },
-        { id: 17, name: "彩票", sign: "￥", category: "income" },
-        { id: 19, name: "滴滴", sign: "￥", category: "income" },
-        { id: 4, name: "工资", sign: "￥", category: "income" },
-        { id: 5, name: "彩票", sign: "￥", category: "income" },
-        { id: 6, name: "滴滴", sign: "￥", category: "income" },
-        { id: 11, name: "彩票", sign: "￥", category: "income" },
-        { id: 18, name: "滴滴", sign: "￥", category: "income" },
-        { id: 17, name: "彩票", sign: "￥", category: "income" },
-        { id: 19, name: "滴滴", sign: "￥", category: "income" },
-        { id: 4, name: "工资", sign: "￥", category: "income" },
-        { id: 5, name: "彩票", sign: "￥", category: "income" },
-        { id: 6, name: "滴滴", sign: "￥", category: "income" },
-        { id: 11, name: "彩票", sign: "￥", category: "income" },
-        { id: 18, name: "滴滴", sign: "￥", category: "income" },
-        { id: 17, name: "彩票", sign: "￥", category: "income" },
-        { id: 19, name: "滴滴", sign: "￥", category: "income" },
-        { id: 4, name: "工资", sign: "￥", category: "income" },
-        { id: 5, name: "彩票", sign: "￥", category: "income" },
-        { id: 6, name: "滴滴", sign: "￥", category: "income" },
-        { id: 11, name: "彩票", sign: "￥", category: "income" },
-        { id: 18, name: "滴滴", sign: "￥", category: "income" },
-        { id: 17, name: "彩票", sign: "￥", category: "income" },
-        { id: 19, name: "滴滴", sign: "￥", category: "income" },
-        { id: 4, name: "工资", sign: "￥", category: "income" },
-        { id: 5, name: "彩票", sign: "￥", category: "income" },
-        { id: 6, name: "滴滴", sign: "￥", category: "income" },
-        { id: 11, name: "彩票", sign: "￥", category: "income" },
-        { id: 18, name: "滴滴", sign: "￥", category: "income" },
-        { id: 17, name: "彩票", sign: "￥", category: "income" },
-        { id: 19, name: "滴滴", sign: "￥", category: "income" },
-      ]);
-
       return (
         <MainLayout class={s.layout}>
           {{
