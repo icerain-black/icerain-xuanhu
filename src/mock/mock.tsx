@@ -12,6 +12,7 @@ export const mockSession: Mock = (config) =>{
 }
 
 export const mockTagIndex:Mock = (config) => {
+  const {kind,page} = config.params
   let id = 0
   const createId = () => {
     id += 1
@@ -26,13 +27,25 @@ export const mockTagIndex:Mock = (config) => {
       kind:config.params.kind
     }))
 
-  if (config.params.kind === "expenses") {
-    return [200,{
-      resources:createTag(10)
-    }]
-  }else{
-    return [200,{
-      resources:createTag(20)
-    }]
+  const createTagData = (tagNumber:number,page:number) => {
+    let count = 26
+    return {
+      resources:createTag(tagNumber),
+      pager:{
+        page,
+        per_page:25,
+        count
+      }
+    }
+  }
+
+  if (kind === "expenses" && !page || page === 1  ) {
+    return [200,createTagData(25,page)]
+  }else if (kind === "expenses" && page === 2) {
+    return [200,createTagData(1,page)]
+  }else if (kind === "income" && !page || page === 1) {
+    return [200,createTagData(25,page)]    
+  }{
+    return [200,createTagData(1,page)]
   }
 }
