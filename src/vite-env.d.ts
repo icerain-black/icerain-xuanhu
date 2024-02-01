@@ -10,6 +10,16 @@ type Tag = {
   kind: "expenses" | "income"
 }
 
+type itemCreateRes = {
+  id: number,
+  user_id: number,
+  amount: number,
+  note: string | null,
+  tag_ids: number[],
+}
+
+
+
 type TagData<T = any> = {
   resources:T[],
   pager:{
@@ -17,4 +27,12 @@ type TagData<T = any> = {
     per_page:number,
     count:number
   }
+}
+
+type Resource<T> = {
+  resource:T
+}
+
+type ResourceError = {
+  errors: Record<string, string[]>
 }

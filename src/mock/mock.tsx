@@ -16,6 +16,25 @@ const createId = () => {
   return id
 }
 
+export const mockItemCreate:Mock = (config) => {
+  // return [422,{
+  //   errors:["id不明确"]
+  // }]
+  
+  return [200,{
+    resource:{
+      id: 526,
+      user_id: 276,
+      amount: 9900,
+      note: null,
+      tag_ids: [
+        721,
+        722
+      ],
+    }
+  }]
+}
+
 export const mockTagIndex:Mock = (config) => {
   const {kind,page} = config.params
   
