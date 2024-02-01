@@ -30,7 +30,7 @@ export const Tabs = defineComponent({
                     class={props.selected === item.props?.kind && s.selected}
                     onClick={() => ctx.emit("update:selected",item.props?.kind)}
                   >
-                    {kindMap[item.props?.kind]}
+                    {kindMap[item.props?.kind] || item.props?.kind}
                   </li>
                 )
               }

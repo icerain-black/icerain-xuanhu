@@ -34,7 +34,6 @@ export const ItemCreate = defineComponent({
           _mock:"itemCreate"
         }
       }).catch(onError)
-      console.log(response);
       router.push("/items")
     }
     return () => {
@@ -46,7 +45,6 @@ export const ItemCreate = defineComponent({
             default: () => (
               <>
                 <div class={s.wrapper}>
-                  {JSON.stringify(formData)}
                   <Tabs v-model:selected={formData.kind} class={s.tabs}>
                     <Tab kind="expenses" >
                       <Tags kind="expenses"
