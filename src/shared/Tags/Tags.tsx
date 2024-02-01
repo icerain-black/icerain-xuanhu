@@ -9,8 +9,12 @@ export const Tags = defineComponent({
     kind:{
       type:String as PropType<"expenses" | "income">,
       require:true
+    },
+    select:{
+      type:Number
     }
   },
+  emits:["update:select"],
   setup(props, ctx) {
     const {
       refHasMore,
@@ -25,7 +29,7 @@ export const Tags = defineComponent({
     })
     return () => {
       return (
-        <>
+        <div>
           <div class={s.tags_wrapper}>
             <div class={s.tag}>
               <div class={s.sign}>
@@ -34,7 +38,9 @@ export const Tags = defineComponent({
               <div class={s.name}>新增</div>
             </div>
               {refTags.value.map((tag) => (
-                <div class={[s.tag, s.selected]}>
+                <div class={[s.tag, props.select === tag.id ? s.selected : ""]}
+                  onClick={() => ctx.emit("update:select",tag.id)}
+                >
                   <div class={s.sign}>{tag.sign}</div>
                   <div class={s.name}>{tag.name}</div>
                 </div>
@@ -43,7 +49,7 @@ export const Tags = defineComponent({
           <div class={s.hasMore_wrapper}>
             {refHasMore.value ? <Button onClick={fetcherTags}>点击加载更多</Button> : <span>没有更多标签</span>}
           </div>
-        </>
+        </div>
       )
     }
   },

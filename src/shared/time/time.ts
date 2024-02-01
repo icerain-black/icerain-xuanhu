@@ -1,8 +1,14 @@
 export class Time {
   date;
 
-  constructor(date = new Date()) {
-    this.date = date;
+  constructor(date?:string | Date) {
+    if (typeof date === "string") {
+      this.date = new Date(date)
+    }else if (date instanceof Date) {
+      this.date = date
+    }else{
+      this.date = new Date();
+    }
   }
 
   format(pattern = "YYYY-MM-DD") {

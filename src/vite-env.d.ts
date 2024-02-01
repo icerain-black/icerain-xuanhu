@@ -4,7 +4,7 @@
 type JSONValue = null | boolean | string | number | JSONValue[] | Record<string, JSONValue>
 
 type Tag = {
-  id:string,
+  id:number,
   name: string,
   sign:string,
   kind: "expenses" | "income"

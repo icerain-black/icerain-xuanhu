@@ -1,9 +1,23 @@
-import { defineComponent, ref } from "vue";
+import { PropType, defineComponent, ref } from "vue";
 import s from "./InputPad.module.scss";
 import { Icon } from "../../shared/Icon/Icon";
 import { Time } from "../../shared/time/time";
 import { DatetimePicker,Popup } from 'vant';
 export const InputPad = defineComponent({
+  props:{
+    happenAt:{
+      type:String,
+      require:true
+    },
+    amount:{
+      type:Number,
+      require:true
+    },
+    onSumit:{
+      type:Function as PropType<() => void>
+    }
+  },
+  emits:["update:happenAt","update:amount"],
   setup(props, ctx) {
     const buttons = [
       { text: "1", onClick: () => {appendNumber("1")} },
@@ -17,11 +31,12 @@ export const InputPad = defineComponent({
       { text: "9", onClick: () => {appendNumber("9")} },
       { text: ".", onClick: () => {appendNumber(".")} },
       { text: "0", onClick: () => {appendNumber("0")} },
-      { text: "清空", onClick: () => {ref_amount.value = "0"} },
-      { text: "提交", onClick: () => {} },
+      { text: "清空", onClick: () => {ctx.emit("update:amount",0);ref_amount.value = "0"} },
+      { text: "提交", onClick: () => {
+        ctx.emit("update:amount",parseFloat(ref_amount.value))
+        props.onSumit?.()
+      }},
     ];
-
-    const ref_amount = ref("0")
 
     const appendNumber = (n:string|number) => {
       let value = n.toString()
@@ -52,11 +67,11 @@ export const InputPad = defineComponent({
 
       ref_amount.value += value
     }
-    const ref_time = ref(new Date())
     const ref_show = ref(false)
+    const ref_amount = ref("0")
 
     const dateConfirm = (date:Date) =>{
-      ref_time.value = date
+      ctx.emit("update:happenAt",date.toISOString())
       dateCancel()
     }
     const dateCancel = () => ref_show.value = false
@@ -65,16 +80,16 @@ export const InputPad = defineComponent({
     }
     return () => {
       return (
-        <>
+        <div>
           <div class={s.info}>
             <span class={s.date}>
               <Icon name="date" class={s.icon}></Icon>
-              <span onClick={showDate}>{new Time(ref_time.value).format()}</span>
+              <span onClick={showDate}>{new Time(props.happenAt).format()}</span>
               <Popup position="bottom"  v-model:show={ref_show.value}>
                 <DatetimePicker
                   onConfirm={dateConfirm}
                   onCancel={dateCancel}
-                  value={ref_time.value}
+                  value={props.happenAt}
                   type="date"
                   title="选择年月日"
                 />
@@ -87,7 +102,7 @@ export const InputPad = defineComponent({
               <button onClick={item.onClick}>{item.text}</button>
             ))}
           </div>
-        </>
+        </div>
       );
     };
   },

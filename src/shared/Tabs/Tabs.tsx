@@ -8,6 +8,10 @@ export const Tabs = defineComponent({
   },
   emits:["update:selected"],
   setup(props, ctx) {
+    const kindMap:Record<string,string> = {
+      "expenses":"支出",
+      "income":"收入"
+    }
     return () => {
       let nodeArr = ctx.slots.default?.()
       if (!nodeArr) {return}
@@ -26,7 +30,7 @@ export const Tabs = defineComponent({
                     class={props.selected === item.props?.kind && s.selected}
                     onClick={() => ctx.emit("update:selected",item.props?.kind)}
                   >
-                    {item.props?.kind}
+                    {kindMap[item.props?.kind]}
                   </li>
                 )
               }
