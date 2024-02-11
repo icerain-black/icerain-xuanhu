@@ -9,6 +9,7 @@ import { http } from "../shared/http/http";
 import { AxiosError } from "axios";
 import { useRoute, useRouter } from "vue-router";
 import { refreshMe } from "../shared/me/me";
+import { BackIcon } from "../shared/BackIcon/BackIcon";
 export const SignInPage = defineComponent({
   setup(props, ctx) {
     const formData = reactive({
@@ -68,7 +69,7 @@ export const SignInPage = defineComponent({
         <MainLayout>{
           {
             title:() => "登录",
-            icon:() => <Icon name="left"></Icon>,
+            icon:() => <BackIcon></BackIcon>,
             default:() => (
               <div class={s.wrapper}>
                 <div class={s.logo}>
