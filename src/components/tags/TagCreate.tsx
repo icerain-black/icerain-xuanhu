@@ -13,15 +13,13 @@ export const TagCreate = defineComponent({
             title: () => "新建标签",
             icon: () => <BackIcon></BackIcon>,
             default: () => (
-              <>
-                <TagFrom>
-                  <div class={s.buttons}>
-                    <div class={s.main}>
-                      <Button class={[s.formItem, s.button]}>确定</Button>
-                    </div>
+              <TagFrom>
+                <div class={s.buttons}>
+                  <div class={s.main}>
+                    <Button class={[s.formItem, s.button]}>确定</Button>
                   </div>
-                </TagFrom>
-              </>
+                </div>
+              </TagFrom>
             ),
           }}
         </MainLayout>

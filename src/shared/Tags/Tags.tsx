@@ -4,6 +4,7 @@ import { useTags } from "./useTags";
 import { Button } from "../Button/Button";
 import { Icon } from "../Icon/Icon";
 import { http } from "../http/http";
+import { RouterLink } from "vue-router";
 export const Tags = defineComponent({
   props:{
     kind:{
@@ -31,12 +32,12 @@ export const Tags = defineComponent({
       return (
         <div>
           <div class={s.tags_wrapper}>
-            <div class={s.tag}>
+            <RouterLink to={`/tags/create?kind=${props.kind}`} class={s.tag}>
               <div class={s.sign}>
                 <Icon name="add" class={s.createTag} />
               </div>
               <div class={s.name}>新增</div>
-            </div>
+            </RouterLink>
               {refTags.value.map((tag) => (
                 <div class={[s.tag, props.select === tag.id ? s.selected : ""]}
                   onClick={() => ctx.emit("update:select",tag.id)}

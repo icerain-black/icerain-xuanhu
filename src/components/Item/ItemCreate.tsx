@@ -29,7 +29,7 @@ export const ItemCreate = defineComponent({
     }
 
     const onSumit = async() => {
-      let response = await http.post<Resource<itemCreateRes>>("/items",formData,{
+      await http.post<Resource<itemCreateRes>>("/items",formData,{
         params:{
           _mock:"itemCreate"
         }
