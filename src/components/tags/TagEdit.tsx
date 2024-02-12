@@ -4,17 +4,19 @@ import { MainLayout } from "../../shared/MainLayout/MainLayout";
 import { TagFrom } from "./TagForm";
 import { Button } from "../../shared/Button/Button";
 import { BackIcon } from "../../shared/BackIcon/BackIcon";
+import { useRoute } from "vue-router";
 export const TagEdit = defineComponent({
   setup(props, ctx) {
+    const route = useRoute()
     return () => {
       return (
         <MainLayout>
           {{
-            title: () => "新建标签",
+            title: () => "编辑标签",
             icon: () => <BackIcon></BackIcon>,
             default: () => (
               <>
-                <TagFrom class={s.tagForm}>
+                <TagFrom class={s.tagForm} id={+route.params.id}>
                   <div class={s.buttons}>
                     <div class={s.main}>
                       <Button class={[s.formItem, s.button]}>确定</Button>
