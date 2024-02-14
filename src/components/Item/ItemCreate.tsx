@@ -29,7 +29,7 @@ export const ItemCreate = defineComponent({
     }
 
     const onSumit = async() => {
-      await http.post<Resource<itemCreateRes>>("/items",formData).catch(onError)
+      await http.post<Resource<Item>>("/items",formData).catch(onError)
       router.push("/items")
     }
     return () => {

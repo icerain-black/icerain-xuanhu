@@ -1,6 +1,9 @@
-import { defineComponent, PropType } from 'vue';
+import { defineComponent, onMounted, PropType, ref } from 'vue';
 import s from './ItemSummary.module.scss';
 import { FloatButton } from '../../shared/FloatButton/FloatButton';
+import { http } from '../../shared/http/http';
+import { Time } from '../../shared/time/time';
+import { Button } from '../../shared/Button/Button';
 export const ItemSummary = defineComponent({
   props: {
     startDate: {
@@ -13,6 +16,29 @@ export const ItemSummary = defineComponent({
     }
   },
   setup: (props, context) => {
+    const ref_page = ref(1)
+    const refHasMore = ref(false);
+    const ref_items = ref<Item[]>([])
+
+    const fetchItem = async () => {
+      const res = await http.get<ItemData<Item>>("/items",{
+        happened_after:props.startDate,
+        happened_before:props.endDate,
+        page:ref_page.value
+      })
+      const {resources,pager} = res.data
+      console.log(resources);
+      
+      ref_page.value = pager.page
+      ref_items.value.push(...resources)
+
+      refHasMore.value = ((pager.page - 1) * pager.per_page + resources.length) < pager.count
+      ref_page.value++
+    }
+
+    onMounted(() => {
+      fetchItem()
+    })
     return () => (
       <div class={s.wrapper}>
         <ul class={s.total}>
@@ -21,93 +47,35 @@ export const ItemSummary = defineComponent({
           <li><span>净收入</span><span>39</span></li>
         </ul>
         <ol class={s.list}>
-          <li>
-            <div class={s.sign}>
-              <span>X</span>
-            </div>
-            <div class={s.text}>
-              <div class={s.tagAndAmount}>
-                <span class={s.tag}>旅行</span>
-                <span class={s.amount}>￥1234</span>
+          {ref_items.value.map(item => {
+            return (
+            <li id={item.id.toString()}>
+              <div class={s.sign}>
+                <span>{item.tags[0].sign}</span>
               </div>
-              <div class={s.time}>
-                2000-01-01 12:39
+              <div class={s.text}>
+                <div class={s.tagAndAmount}>
+                  <span class={s.tag}>{item.tags[0].name}</span>
+                  <span class={s.amount}>￥{item.amount}</span>
+                </div>
+                <div class={s.time}>
+                  {new Time(item.happened_at).format()}
+                </div>
               </div>
-            </div>
-          </li>
-          <li>
-            <div class={s.sign}>
-              <span>X</span>
-            </div>
-            <div class={s.text}>
-              <div class={s.tagAndAmount}>
-                <span class={s.tag}>旅行</span>
-                <span class={s.amount}>￥1234</span>
-              </div>
-              <div class={s.time}>
-                2000-01-01 12:39
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class={s.sign}>
-              <span>X</span>
-            </div>
-            <div class={s.text}>
-              <div class={s.tagAndAmount}>
-                <span class={s.tag}>旅行</span>
-                <span class={s.amount}>￥1234</span>
-              </div>
-              <div class={s.time}>
-                2000-01-01 12:39
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class={s.sign}>
-              <span>X</span>
-            </div>
-            <div class={s.text}>
-              <div class={s.tagAndAmount}>
-                <span class={s.tag}>旅行</span>
-                <span class={s.amount}>￥1234</span>
-              </div>
-              <div class={s.time}>
-                2000-01-01 12:39
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class={s.sign}>
-              <span>X</span>
-            </div>
-            <div class={s.text}>
-              <div class={s.tagAndAmount}>
-                <span class={s.tag}>旅行</span>
-                <span class={s.amount}>￥1234</span>
-              </div>
-              <div class={s.time}>
-                2000-01-01 12:39
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class={s.sign}>
-              <span>X</span>
-            </div>
-            <div class={s.text}>
-              <div class={s.tagAndAmount}>
-                <span class={s.tag}>旅行</span>
-                <span class={s.amount}>￥1234</span>
-              </div>
-              <div class={s.time}>
-                2000-01-01 12:39
-              </div>
-            </div>
-          </li>
+            </li>
+            )
+          })}
         </ol>
-        <div class={s.more}>向下滑动加载更多</div>
-        <FloatButton iconName='add' />
+        <div class={s.more}>
+          {
+            refHasMore.value ? 
+            <Button onClick={fetchItem}>点击加载更多</Button> : 
+            <span>已经到底了</span>
+          }
+        </div>
+        <div class={s.float_button}>
+          <FloatButton iconName='add' />
+        </div>
       </div>
     )
   }

@@ -10,15 +10,29 @@ type Tag = {
   kind: "expenses" | "income"
 }
 
-type itemCreateRes = {
+type Item = {
   id: number,
   user_id: number,
   amount: number,
   note: string | null,
+  happened_at:string,
   tag_ids: number[],
+  tags:{
+    id: number,
+    user_id: number,
+    name: string,
+    sign: string,
+  }[]
 }
 
-
+type ItemData<T = any> = {
+  resources:T[],
+  pager:{
+    page:number,
+    per_page:number,
+    count:number
+  }
+}
 
 type TagData<T = any> = {
   resources:T[],
