@@ -11,10 +11,10 @@ import { Button } from "../../shared/Button/Button";
 import { OverlayIcon } from "../../shared/OverLay/Overlay";
 export const ItemList = defineComponent({
   setup(props, ctx) {
-    const customTime = reactive({
-      start:new Time().format(),
-      end:new Time().format()
-    })
+    const customTime = reactive<{
+      start?:string,
+      end?:string
+    }>({})
 
     const time = new Time()
 

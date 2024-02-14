@@ -8,11 +8,9 @@ export const ItemSummary = defineComponent({
   props: {
     startDate: {
       type: String as PropType<string>,
-      required: true
     },
     endDate: {
       type: String as PropType<string>,
-      required: true
     }
   },
   setup: (props, context) => {
@@ -21,6 +19,9 @@ export const ItemSummary = defineComponent({
     const ref_items = ref<Item[]>([])
 
     const fetchItem = async () => {
+      if (!props.startDate || !props.endDate) {
+        return
+      }
       const res = await http.get<ItemData<Item>>("/items",{
         happened_after:props.startDate,
         happened_before:props.endDate,
