@@ -11,6 +11,12 @@ import { Button } from "../../shared/Button/Button";
 import { OverlayIcon } from "../../shared/OverLay/Overlay";
 export const ItemList = defineComponent({
   setup(props, ctx) {
+    
+    const tempCustomTime = reactive({
+      start:new Time().format(),
+      end:new Time().format()
+    })
+
     const customTime = reactive<{
       start?:string,
       end?:string
@@ -35,6 +41,8 @@ export const ItemList = defineComponent({
 
     const onSubmitCustomTime = (e: Event) => {
       e.preventDefault()
+      customTime.start = tempCustomTime.start
+      customTime.end = tempCustomTime.end
       refOverlayVisible.value = false
     }
 
@@ -67,8 +75,8 @@ export const ItemList = defineComponent({
                   </header>
                   <main>
                     <Form onSubmit={onSubmitCustomTime}>
-                      <FormItem label='开始时间' v-model:value={customTime.start} type='date' />
-                      <FormItem label='结束时间' v-model:value={customTime.end} type='date' />
+                      <FormItem label='开始时间' v-model:value={tempCustomTime.start} type='date' />
+                      <FormItem label='结束时间' v-model:value={tempCustomTime.end} type='date' />
                       <FormItem>
                         <div class={s.actions}>
                           <Button type="button" onClick={() => refOverlayVisible.value = false} class={s.button}>取消</Button>

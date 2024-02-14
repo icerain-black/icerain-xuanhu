@@ -1,4 +1,4 @@
-import { defineComponent, onMounted, PropType, reactive, ref } from 'vue';
+import { defineComponent, onMounted, PropType, reactive, ref, watch } from 'vue';
 import s from './ItemSummary.module.scss';
 import { FloatButton } from '../../shared/FloatButton/FloatButton';
 import { http } from '../../shared/http/http';
@@ -26,7 +26,7 @@ export const ItemSummary = defineComponent({
       income: 0
     })
 
-    const fetchItem = async () => {
+    const fetchItems = async () => {
       if (!props.startDate || !props.endDate) {return}
       const res = await http.get<ItemData<Item>>("/items",{
         happened_after:props.startDate,
@@ -53,7 +53,15 @@ export const ItemSummary = defineComponent({
     }
 
     onMounted(() => {
-      fetchItem()
+      fetchItems()
+      fetchBalance()
+    })
+
+    watch(()=>[props.startDate,props.endDate], ()=>{
+      ref_items.value = []
+      refHasMore.value = false
+      ref_page.value = 1
+      fetchItems()
       fetchBalance()
     })
     
@@ -89,7 +97,7 @@ export const ItemSummary = defineComponent({
         <div class={s.more}>
           {
             refHasMore.value ? 
-            <Button onClick={fetchItem}>点击加载更多</Button> : 
+            <Button onClick={fetchItems}>点击加载更多</Button> : 
             <span>已经到底了</span>
           }
         </div>
