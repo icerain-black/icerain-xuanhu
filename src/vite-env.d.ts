@@ -25,6 +25,12 @@ type Item = {
   }[]
 }
 
+type Balance = {
+  income: number,
+  expenses: number,
+  balance: number
+}
+
 type ItemData<T = any> = {
   resources:T[],
   pager:{

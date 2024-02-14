@@ -1,4 +1,4 @@
-import { defineComponent, onMounted, PropType, ref } from 'vue';
+import { defineComponent, onMounted, PropType, reactive, ref } from 'vue';
 import s from './ItemSummary.module.scss';
 import { FloatButton } from '../../shared/FloatButton/FloatButton';
 import { http } from '../../shared/http/http';
@@ -20,10 +20,14 @@ export const ItemSummary = defineComponent({
     const refHasMore = ref(false);
     const ref_items = ref<Item[]>([])
 
+    const balanceData = reactive<Balance>({
+      balance: 0,
+      expenses: 0,
+      income: 0
+    })
+
     const fetchItem = async () => {
-      if (!props.startDate || !props.endDate) {
-        return
-      }
+      if (!props.startDate || !props.endDate) {return}
       const res = await http.get<ItemData<Item>>("/items",{
         happened_after:props.startDate,
         happened_before:props.endDate,
@@ -38,15 +42,27 @@ export const ItemSummary = defineComponent({
       ref_page.value++
     }
 
+    const fetchBalance = async () => {
+      if (!props.startDate || !props.endDate) {return}
+      const res = await http.get<Balance>("/items/balance",{
+        happened_after:props.startDate,
+        happened_before:props.endDate,
+      })
+      
+      Object.assign(balanceData,res.data)
+    }
+
     onMounted(() => {
       fetchItem()
+      fetchBalance()
     })
+    
     return () => (
       <div class={s.wrapper}>
         <ul class={s.total}>
-          <li><span>收入</span><span>128</span></li>
-          <li><span>支出</span><span>99</span></li>
-          <li><span>净收入</span><span>39</span></li>
+          <li><span>收入</span><span>{balanceData.income}</span></li>
+          <li><span>支出</span><span>{balanceData.expenses}</span></li>
+          <li><span>净收入</span><span>{balanceData.balance}</span></li>
         </ul>
         <ol class={s.list}>
           {ref_items.value.map(item => {
