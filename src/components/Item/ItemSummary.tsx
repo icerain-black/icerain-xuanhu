@@ -5,6 +5,7 @@ import { http } from '../../shared/http/http';
 import { Time } from '../../shared/time/time';
 import { Button } from '../../shared/Button/Button';
 import { Money } from '../../shared/Money/Money';
+import { DateTime } from '../../shared/DateTime/DateTime';
 export const ItemSummary = defineComponent({
   props: {
     startDate: {
@@ -62,7 +63,7 @@ export const ItemSummary = defineComponent({
                   </span>
                 </div>
                 <div class={s.time}>
-                  {new Time(item.happened_at).format()}
+                  <DateTime time={item.happened_at}></DateTime>
                 </div>
               </div>
             </li>
