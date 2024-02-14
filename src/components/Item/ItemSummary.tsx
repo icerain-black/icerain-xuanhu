@@ -4,6 +4,7 @@ import { FloatButton } from '../../shared/FloatButton/FloatButton';
 import { http } from '../../shared/http/http';
 import { Time } from '../../shared/time/time';
 import { Button } from '../../shared/Button/Button';
+import { Money } from '../../shared/Money/Money';
 export const ItemSummary = defineComponent({
   props: {
     startDate: {
@@ -28,7 +29,6 @@ export const ItemSummary = defineComponent({
         page:ref_page.value
       })
       const {resources,pager} = res.data
-      console.log(resources);
       
       ref_page.value = pager.page
       ref_items.value.push(...resources)
@@ -57,7 +57,9 @@ export const ItemSummary = defineComponent({
               <div class={s.text}>
                 <div class={s.tagAndAmount}>
                   <span class={s.tag}>{item.tags[0].name}</span>
-                  <span class={s.amount}>￥{item.amount / 100}</span>
+                  <span class={s.amount}>
+                    <Money value={item.amount}></Money>
+                  </span>
                 </div>
                 <div class={s.time}>
                   {new Time(item.happened_at).format()}
