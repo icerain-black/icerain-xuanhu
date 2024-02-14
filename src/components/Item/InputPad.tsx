@@ -33,7 +33,7 @@ export const InputPad = defineComponent({
       { text: "0", onClick: () => {appendNumber("0")} },
       { text: "清空", onClick: () => {ctx.emit("update:amount",0);ref_amount.value = "0"} },
       { text: "提交", onClick: () => {
-        ctx.emit("update:amount",parseFloat(ref_amount.value))
+        ctx.emit("update:amount",parseFloat(ref_amount.value) * 100)
         props.onSumit?.()
       }},
     ];
@@ -68,7 +68,7 @@ export const InputPad = defineComponent({
       ref_amount.value += value
     }
     const ref_show = ref(false)
-    const ref_amount = ref("0")
+    const ref_amount = ref(props.amount ? (props.amount / 100).toString() : '0')
 
     const dateConfirm = (date:Date) =>{
       ctx.emit("update:happenAt",date.toISOString())
