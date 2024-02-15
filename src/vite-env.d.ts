@@ -37,6 +37,15 @@ type User = {
   name: string | null,
 }
 
+type LineChartData = {
+  groups: {
+    happen_at: string,
+    tag: string | null,
+    amount: number
+  }[],
+  total: number
+}
+
 type ItemData<T = any> = {
   resources:T[],
   pager:{
