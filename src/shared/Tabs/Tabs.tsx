@@ -36,12 +36,8 @@ export const Tabs = defineComponent({
               }
             </ol>
           </div>
-          <div class={s.tab}>
-            {nodeArr.map(item =>
-            <div v-show={props.selected === item.props?.kind}>
-              {item}
-            </div> 
-            )}
+          <div class={s.tab} key={props.selected}>
+            {nodeArr.find(item =>props.selected === item.props?.kind)}
           </div>
         </div>
       )
