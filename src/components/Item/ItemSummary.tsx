@@ -101,9 +101,7 @@ export const ItemSummary = defineComponent({
             <span>已经到底了</span>
           }
         </div>
-        <div class={s.float_button}>
-          <FloatButton iconName='add' />
-        </div>
+        <FloatButton class={s.float_button} iconName='add' />
       </div>
     )
   }
