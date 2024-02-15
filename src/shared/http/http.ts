@@ -15,7 +15,7 @@ class Http{
   }
 
   get<R = unknown>(url: string, query?: Record<string, JSONValue>, config?: GetConfig) {
-    return this.instance.request({
+    return this.instance.request<R>({
       ...config,
       url,
       params:query,
@@ -24,7 +24,7 @@ class Http{
   }
 
   post<R = unknown>(url: string, data?: Record<string, JSONValue>, config?: PostConfig) {
-    return this.instance.request({
+    return this.instance.request<R>({
       ...config,
       url,
       data,
@@ -33,7 +33,7 @@ class Http{
   }
 
   patch<R = unknown>(url: string, data?: Record<string, JSONValue>, config?: PatchConfig) {
-    return this.instance.request({
+    return this.instance.request<R>({
       ...config,
       url,
       data,
@@ -42,7 +42,7 @@ class Http{
   }
 
   delete<R = unknown>(url: string, query?: Record<string, string>, config?: DeleteConfig) {
-    return this.instance.request({
+    return this.instance.request<R>({
       ...config,
       url,
       params:query,
