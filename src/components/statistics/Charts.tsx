@@ -50,12 +50,21 @@ export const Charts = defineComponent({
       lineChartData_before.value = res.data.groups
     })
 
-    const pieChartData_before = ref<StatisticsResData<PieChartResData>["groups"]>()
-    const picChartData = computed(() => 
-      pieChartData_before.value?.map(item => {
+    const pieChartData_before = ref<StatisticsResData<PieChartResData>>()
+    const pieChartData = computed(() => 
+      pieChartData_before.value?.groups.map(item => {
         return {value:item.amount,name:item.tag.name}
       })
     )
+
+    const barChartData = computed(() => {
+      let total = pieChartData_before.value?.total
+      return pieChartData_before.value?.groups.map(itme =>({
+          tag:itme.tag,
+          amount:itme.amount,
+          percent:total ? Math.round(total / itme.amount) * 100 : 0
+      }))
+    })
 
     onMounted(async () => {
       const res = await http.get<StatisticsResData<PieChartResData>>("/items/summary",{
@@ -65,7 +74,7 @@ export const Charts = defineComponent({
         group_by:"tag_id"
       })
 
-      pieChartData_before.value = res.data.groups
+      pieChartData_before.value = res.data
     })
     return () => (
       <div class={s.wrapper}>
@@ -74,8 +83,8 @@ export const Charts = defineComponent({
           { value: 'income', text: '收入' }
         ]} v-model:value={kind.value} />
         <LineChart data={lineChartData.value} />
-        <PieChart data={picChartData.value}/>
-        <Bars />
+        <PieChart data={pieChartData.value}/>
+        <Bars data={barChartData.value}/>
       </div>
     )
   }

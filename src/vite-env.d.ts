@@ -54,7 +54,8 @@ type PieChartResData = {
     id: number,
     user_id: number,
     name: string
-    kind: expenses
+    kind: "expenses" | "income",
+    sign:string
   },
   amount: number
 }
