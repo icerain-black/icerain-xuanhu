@@ -6,6 +6,7 @@ import { Time } from '../../shared/time/time';
 import { Button } from '../../shared/Button/Button';
 import { Money } from '../../shared/Money/Money';
 import { DateTime } from '../../shared/DateTime/DateTime';
+import { useRouter } from 'vue-router';
 export const ItemSummary = defineComponent({
   props: {
     startDate: {
@@ -16,6 +17,8 @@ export const ItemSummary = defineComponent({
     }
   },
   setup: (props, context) => {
+    const router = useRouter()
+
     const ref_page = ref(1)
     const refHasMore = ref(false);
     const ref_items = ref<Item[]>([])
@@ -68,9 +71,9 @@ export const ItemSummary = defineComponent({
     return () => (
       <div class={s.wrapper}>
         <ul class={s.total}>
-          <li><span>收入</span><span>{balanceData.income}</span></li>
-          <li><span>支出</span><span>{balanceData.expenses}</span></li>
-          <li><span>净收入</span><span>{balanceData.balance}</span></li>
+          <li><span>收入</span><span>{balanceData.income / 100}</span></li>
+          <li><span>支出</span><span>{balanceData.expenses / 100}</span></li>
+          <li><span>净收入</span><span>{balanceData.balance / 100}</span></li>
         </ul>
         <ol class={s.list}>
           {ref_items.value.map(item => {
@@ -101,7 +104,7 @@ export const ItemSummary = defineComponent({
             <span>已经到底了</span>
           }
         </div>
-        <FloatButton class={s.float_button} iconName='add' />
+        <FloatButton onClick={() => router.push("/items/create")} class={s.float_button} iconName='add' />
       </div>
     )
   }

@@ -6,12 +6,13 @@ export const FloatButton = defineComponent({
     iconName:{
       type:String as PropType<IconProps["name"]>,
       default:"add"
-    }
+    },
+    onClick:Function
   },
   setup(props, ctx) {
     return () => {
       return (
-        <div class={s.wrapper}>
+        <div class={s.wrapper} onClick={props.onClick}>
           <Icon name={props.iconName} class={s.icon}></Icon>
         </div>
       )
