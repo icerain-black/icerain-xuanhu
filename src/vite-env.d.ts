@@ -37,13 +37,26 @@ type User = {
   name: string | null,
 }
 
-type LineChartData = {
-  groups: {
-    happen_at: string,
-    tag: string | null,
-    amount: number
-  }[],
+type StatisticsResData<T> = {
+  groups: T[],
   total: number
+}
+
+type LineChartResData = {
+  happen_at: string,
+  tag: string | null,
+  amount: number
+}
+
+type PieChartResData = {
+  tag_id: number,
+  tag: {
+    id: number,
+    user_id: number,
+    name: string
+    kind: expenses
+  },
+  amount: number
 }
 
 type ItemData<T = any> = {

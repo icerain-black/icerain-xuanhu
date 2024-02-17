@@ -21,7 +21,7 @@ export const Charts = defineComponent({
   setup: (props, context) => {
     const kind = ref('expenses')
 
-    const lineChartData_before = ref<LineChartData["groups"]>([])
+    const lineChartData_before = ref<StatisticsResData<LineChartResData>["groups"]>([])
     const lineChartData = computed(() => {
       if (!props.startDate || !props.endDate) {return []}
       const diff = new Date(props.endDate).getTime() - new Date(props.startDate).getTime()
@@ -40,7 +40,7 @@ export const Charts = defineComponent({
     })
 
     onMounted(async () => {
-      const res = await http.get<LineChartData>("/items/summary",{
+      const res = await http.get<StatisticsResData<LineChartResData>>("/items/summary",{
         happened_after:props.startDate,
         happened_before:props.endDate,
         kind:kind.value,
@@ -49,6 +49,24 @@ export const Charts = defineComponent({
 
       lineChartData_before.value = res.data.groups
     })
+
+    const pieChartData_before = ref<StatisticsResData<PieChartResData>["groups"]>()
+    const picChartData = computed(() => 
+      pieChartData_before.value?.map(item => {
+        return {value:item.amount,name:item.tag.name}
+      })
+    )
+
+    onMounted(async () => {
+      const res = await http.get<StatisticsResData<PieChartResData>>("/items/summary",{
+        happened_after:props.startDate,
+        happened_before:props.endDate,
+        kind:kind.value,
+        group_by:"tag_id"
+      })
+
+      pieChartData_before.value = res.data.groups
+    })
     return () => (
       <div class={s.wrapper}>
         <FormItem label='类型' type="select" options={[
@@ -56,7 +74,7 @@ export const Charts = defineComponent({
           { value: 'income', text: '收入' }
         ]} v-model:value={kind.value} />
         <LineChart data={lineChartData.value} />
-        <PieChart />
+        <PieChart data={picChartData.value}/>
         <Bars />
       </div>
     )
