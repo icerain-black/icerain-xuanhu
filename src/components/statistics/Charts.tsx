@@ -5,6 +5,10 @@ import { LineChart } from './LineChart';
 import { PieChart } from './PieChart';
 import { Bars } from './Bars';
 import { http } from '../../shared/http/http';
+import { Time } from '../../shared/time/time';
+
+const DAY = 24 * 60 * 60 * 1000
+
 export const Charts = defineComponent({
   props: {
     startDate: {
@@ -19,9 +23,33 @@ export const Charts = defineComponent({
 
     const lineChartData_before = ref<LineChartData["groups"]>([])
     const lineChartData = computed(() => {
-      return lineChartData_before.value?.map((item) => {
-        return [item.happen_at,item.amount] as [string,number]
-      })
+      if (!props.startDate || !props.endDate) {
+        return []
+      }
+      const arr = []
+      const diff = new Date(props.endDate).getTime() - new Date(props.startDate).getTime()
+      const dayTime = diff / DAY + 1
+
+      //axio获取的数据的长度
+      let itemIndex = lineChartData_before.value.length
+      
+      for (let i = 0; i < dayTime; i++) {
+        const timeStamp = new Time(props.startDate).add(i,"day").getTimeStamp()
+        const item = lineChartData_before.value[itemIndex - 1]
+        const itemStamp = new Date(item?.happen_at).getTime()
+
+        if (timeStamp === itemStamp) {
+          arr.push([new Date(timeStamp).toISOString(),lineChartData_before.value[itemIndex - 1].amount])
+          itemIndex--
+        }else{
+          arr.push([new Date(timeStamp).toISOString(),0])
+        }
+      }
+      return arr as [string,number][]
+
+      // return lineChartData_before.value?.map((item) => {
+      //   return [item.happen_at,item.amount] as [string,number]
+      // })
     })
 
     onMounted(async () => {

@@ -62,6 +62,10 @@ export class Time {
     return new Time(new Date(this.date.getFullYear() + 1, 0, 0, 0, 0, 0, 0));
   }
 
+  getTimeStamp(){
+    return this.date.getTime()
+  }
+
   add(
     amount: number,
     unit:
