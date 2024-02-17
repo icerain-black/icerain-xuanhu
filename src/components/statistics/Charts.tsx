@@ -61,8 +61,8 @@ export const Charts = defineComponent({
       let total = pieChartData_before.value?.total
       return pieChartData_before.value?.groups.map(itme =>({
           tag:itme.tag,
-          amount:itme.amount,
-          percent:total ? Math.round(total / itme.amount) * 100 : 0
+          amount:itme.amount / 100,
+          percent:total ? Math.round(itme.amount / total * 100) : 0
       }))
     })
 
