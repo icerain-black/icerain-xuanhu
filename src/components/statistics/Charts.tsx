@@ -1,4 +1,4 @@
-import { computed, defineComponent, onMounted, PropType, ref } from 'vue';
+import { computed, defineComponent, onMounted, PropType, ref, watch } from 'vue';
 import s from './Charts.module.scss';
 import { FormItem } from '../../shared/Form/Form';
 import { LineChart } from './LineChart';
@@ -39,7 +39,7 @@ export const Charts = defineComponent({
       return arr as [string,number][]
     })
 
-    onMounted(async () => {
+    const fetchLineChartData = async() => {
       const res = await http.get<StatisticsResData<LineChartResData>>("/items/summary",{
         happened_after:props.startDate,
         happened_before:props.endDate,
@@ -48,7 +48,10 @@ export const Charts = defineComponent({
       })
 
       lineChartData_before.value = res.data.groups
-    })
+    }
+
+    onMounted(fetchLineChartData)
+    watch(() => kind.value,fetchLineChartData)
 
     const pieChartData_before = ref<StatisticsResData<PieChartResData>>()
     const pieChartData = computed(() => 
@@ -66,7 +69,7 @@ export const Charts = defineComponent({
       }))
     })
 
-    onMounted(async () => {
+    const fetchPieChartData = async() => {
       const res = await http.get<StatisticsResData<PieChartResData>>("/items/summary",{
         happened_after:props.startDate,
         happened_before:props.endDate,
@@ -75,7 +78,10 @@ export const Charts = defineComponent({
       })
 
       pieChartData_before.value = res.data
-    })
+    }
+    onMounted(fetchPieChartData)
+    watch(() => kind.value,fetchPieChartData)
+
     return () => (
       <div class={s.wrapper}>
         <FormItem label='类型' type="select" options={[
