@@ -60,7 +60,7 @@ export const SignInPage = defineComponent({
       let data = {
         email:formData.email
       }
-      await http.post("/validation_codes",data).catch(onError)
+      await http.post("/validation_codes",data,{_loading:true}).catch(onError)
       ref_validationCode.value.startCount?.()
     }
 
