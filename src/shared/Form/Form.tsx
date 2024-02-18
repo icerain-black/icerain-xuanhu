@@ -115,7 +115,10 @@ export const FormItem = defineComponent({
               onClick={() => { refDateVisible.value = true }}
               class={[s.formItem, s.input]} />
               <Popup position='bottom' v-model:show={refDateVisible.value}>
-                <DatetimePicker value={props.value} type="date" title="选择年月日"
+                <DatetimePicker 
+                  modelValue={props.value ? new Date(props.value) : new Date()} 
+                  type="date" 
+                  title="选择年月日"
                   onConfirm={(date: Date) => {
                     ctx.emit('update:value', new Time(date).format())
                     refDateVisible.value = false

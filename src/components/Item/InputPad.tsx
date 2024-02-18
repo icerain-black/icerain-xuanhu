@@ -89,7 +89,7 @@ export const InputPad = defineComponent({
                 <DatetimePicker
                   onConfirm={dateConfirm}
                   onCancel={dateCancel}
-                  value={props.happenAt}
+                  modelValue={props.happenAt ? new Date(props.happenAt) : new Date()}
                   type="date"
                   title="选择年月日"
                 />
