@@ -45,7 +45,7 @@ export const Charts = defineComponent({
         happened_before:props.endDate,
         kind:kind.value,
         group_by:"happen_at"
-      })
+      },{_loading:true})
 
       lineChartData_before.value = res.data.groups
     }

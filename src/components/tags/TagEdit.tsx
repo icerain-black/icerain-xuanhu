@@ -21,7 +21,7 @@ export const TagEdit = defineComponent({
         .then(async () => {
         await http.delete(`/tags/${tagId}`,{
           withItem:options.withItem.toString()
-        })
+        },{_loading:true})
         router.back()
       })
         .catch(() => {})

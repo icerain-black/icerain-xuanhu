@@ -25,7 +25,7 @@ export const Tags = defineComponent({
       return http.get<TagData<Tag>>("/tags",{
         kind:props.kind,
         page:page + 1
-      })
+      },{_loading:true})
     })
 
     const router = useRouter()

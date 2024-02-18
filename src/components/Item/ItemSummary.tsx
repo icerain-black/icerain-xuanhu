@@ -35,7 +35,7 @@ export const ItemSummary = defineComponent({
         happened_after:props.startDate,
         happened_before:props.endDate,
         page:ref_page.value
-      })
+      },{_loading:true})
       const {resources,pager} = res.data
       
       ref_page.value = pager.page
