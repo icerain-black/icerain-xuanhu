@@ -1,4 +1,4 @@
-import { Transition, VNode, defineComponent, ref, watchEffect } from "vue";
+import { Transition, VNode, defineComponent, ref } from "vue";
 import { RouteLocationNormalizedLoaded, RouterView, useRoute, useRouter } from "vue-router";
 import s from "./Welcome.module.scss"
 import { useSwiper } from "../hooks/useSwiper";
@@ -36,7 +36,7 @@ export const Welcome = defineComponent({
           </header>
           <main class={s.main} ref={ref_main}>
             <RouterView name="main">
-              {({Component:X,route:R}:{Component: VNode;route: RouteLocationNormalizedLoaded;}) => (
+              {({Component:X}:{Component: VNode;route: RouteLocationNormalizedLoaded;}) => (
                 <Transition 
                   name="slide-fade" 
                   enterActiveClass={s["slide-fade-enter-active"]}

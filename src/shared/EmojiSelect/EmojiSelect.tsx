@@ -14,7 +14,7 @@ export const EmojiSelect = defineComponent({
       type:Function as PropType<(emoji:string) => void>
     }
   },
-  setup: (props, context) => {
+  setup: (props) => {
     const refSelected = ref(0)
     const table: [string, string[]][] = [
       ['表情', ['face-smiling', 'face-affection', 'face-tongue', 'face-hand',

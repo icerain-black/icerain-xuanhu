@@ -34,7 +34,7 @@ export const PieChart = defineComponent({
       type: Array as PropType<{value:number,name:string}[]>
     }
   },
-  setup: (props, context) => {
+  setup: (props) => {
     const refDiv2 = ref<HTMLDivElement>()
     let chart:echarts.ECharts| undefined = undefined 
     onMounted(() => {

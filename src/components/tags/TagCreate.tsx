@@ -5,7 +5,7 @@ import { Button } from "../../shared/Button/Button";
 import { TagFrom } from "./TagForm";
 import { BackIcon } from "../../shared/BackIcon/BackIcon";
 export const TagCreate = defineComponent({
-  setup(props, ctx) {
+  setup() {
     return () => {
       return (
         <MainLayout>

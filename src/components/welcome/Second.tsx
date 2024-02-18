@@ -1,8 +1,7 @@
 import { defineComponent } from 'vue';
-import clock from '../../assets/icons/clock.svg';
 import { WelcomeLayout } from './WelcomeLayout';
 export const Second = defineComponent({
-  setup: (props, context) => {
+  setup: () => {
     return () => (
       <WelcomeLayout>
         {{

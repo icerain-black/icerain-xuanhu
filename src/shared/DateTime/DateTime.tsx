@@ -11,7 +11,7 @@ export const DateTime = defineComponent({
       default:"YYYY-MM-DD HH:mm:ss"
     }
   },
-  setup(props, ctx) {
+  setup(props) {
     const dateFormat = computed(() => new Time(props.time).format("YYYY-MM-DD HH:mm:ss"))
     return () => {
       return (

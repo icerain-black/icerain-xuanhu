@@ -1,8 +1,7 @@
 import { defineComponent } from 'vue';
-import chart from '../../assets/icons/chart.svg';
 import { WelcomeLayout } from './WelcomeLayout';
 export const Thire = defineComponent({
-  setup: (props, context) => {
+  setup: () => {
     return () => (
       <WelcomeLayout>
         {{

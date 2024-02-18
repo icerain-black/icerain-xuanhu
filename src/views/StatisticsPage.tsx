@@ -9,7 +9,7 @@ import { Form, FormItem } from "../shared/Form/Form";
 import { Button } from "../shared/Button/Button";
 import { Charts } from "../components/statistics/Charts";
 export const StatisticsPage = defineComponent({
-  setup(props, ctx) {
+  setup() {
     const customTime = reactive({
       start:new Time().format(),
       end:new Time().format()

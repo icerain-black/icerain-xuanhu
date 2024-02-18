@@ -1,7 +1,7 @@
 import { defineComponent } from 'vue';
 import s from './WelcomeLayout.module.scss';
 export const WelcomeLayout = defineComponent({
-  setup: (props, context) => {
+  setup: (_, context) => {
     let {slots} = context
     return () => (
       <div class={s.wrapper}>

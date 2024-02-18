@@ -6,7 +6,7 @@ export const Money = defineComponent({
       require:true
     }
   },
-  setup(props, ctx) {
+  setup(props) {
     return () => {
       return (
         <span>￥{props.value && addZero(props.value / 100)}</span>

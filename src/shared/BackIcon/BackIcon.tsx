@@ -2,7 +2,7 @@ import {defineComponent} from "vue";
 import { Icon } from "../Icon/Icon";
 import { useRoute, useRouter } from "vue-router";
 export const BackIcon = defineComponent({
-  setup(props, ctx) {
+  setup() {
     const route = useRoute()
     const router = useRouter()
     const onClick = () => {

@@ -1,8 +1,7 @@
 import { defineComponent } from 'vue';
-import cloud from '../../assets/icons/cloud.svg';
 import { WelcomeLayout } from './WelcomeLayout';
 export const Fourth = defineComponent({
-  setup: (props, context) => {
+  setup: () => {
     return () => (
       <WelcomeLayout>
         {{

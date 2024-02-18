@@ -5,7 +5,7 @@ type Mock = (config: AxiosRequestConfig) => [number, any]
 
 faker.setLocale('zh_CN');
 
-export const mockSession: Mock = (config) =>{
+export const mockSession: Mock = () =>{
   return [200, {
     jwt: faker.random.word()
   }]
@@ -16,7 +16,7 @@ const createId = () => {
   return id
 }
 
-export const mockItemCreate:Mock = (config) => {
+export const mockItemCreate:Mock = () => {
   // return [422,{
   //   errors:["id不明确"]
   // }]
@@ -39,7 +39,7 @@ export const mockTagIndex:Mock = (config) => {
   const {kind,page} = config.params
   
 
-  const createTag = (num = 1,attrs?: any) => 
+  const createTag = (num = 1) => 
      Array.from({length:num}).map(() => ({
       id:createId(),
       name:faker.lorem.word(),

@@ -10,7 +10,7 @@ export const Overlay = defineComponent({
       type: Function as PropType<() => void>
     }
   },
-  setup: (props, context) => {
+  setup: (props) => {
     const route = useRoute()
     const router = useRouter()
 
@@ -78,7 +78,7 @@ export const Overlay = defineComponent({
 })
 
 export const OverlayIcon = defineComponent({
-  setup(props, ctx) {
+  setup() {
     const refOverlayVisible = ref(false);
     const onClickMenu = () => {
       refOverlayVisible.value = !refOverlayVisible.value;

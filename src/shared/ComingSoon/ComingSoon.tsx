@@ -8,7 +8,7 @@ export const ComingSoon = defineComponent({
       type: String as PropType<string>
     }
   },
-  setup: (props, context) => {
+  setup: () => {
     return () => (
       <div>
         <Center class={s.pig_wrapper}>

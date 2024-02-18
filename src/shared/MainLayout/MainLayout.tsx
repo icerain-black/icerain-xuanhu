@@ -1,7 +1,7 @@
 import {defineComponent} from "vue";
 import { Navbar } from "../Navbar/Navbar";
 export const MainLayout = defineComponent({
-  setup(props, ctx) {
+  setup(_, ctx) {
     return () => {
       return (
         <div>

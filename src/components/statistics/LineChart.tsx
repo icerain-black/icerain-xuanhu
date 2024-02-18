@@ -44,7 +44,7 @@ export const LineChart = defineComponent({
       type:Object as PropType<[string,number][]>
     }
   },
-  setup: (props, context) => {
+  setup: (props) => {
     const refDiv = ref<HTMLDivElement>()
     let chart:echarts.ECharts | undefined = undefined
     onMounted(() => {

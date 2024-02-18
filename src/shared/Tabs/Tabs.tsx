@@ -1,4 +1,4 @@
-import {PropType, defineComponent} from "vue";
+import {defineComponent} from "vue";
 import s from "./Tabs.module.scss"
 export const Tabs = defineComponent({
   props:{
@@ -52,7 +52,7 @@ export const Tab = defineComponent({
       require:true
     }
   },
-  setup(props, ctx) {
+  setup(_, ctx) {
     return () => {
       return (
         <div>

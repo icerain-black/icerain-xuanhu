@@ -1,24 +1,18 @@
-import { defineComponent, onMounted, ref } from "vue";
+import { defineComponent, onMounted } from "vue";
 import s from "./StartPage.module.scss";
 import { Button } from "../shared/Button/Button";
 import { FloatButton } from "../shared/FloatButton/FloatButton";
 import { Center } from "../shared/Center/Centet";
 import { Icon } from "../shared/Icon/Icon";
-import { Overlay, OverlayIcon } from "../shared/OverLay/Overlay";
+import { OverlayIcon } from "../shared/OverLay/Overlay";
 import { RouterLink } from "vue-router";
 import { MainLayout } from "../shared/MainLayout/MainLayout";
 export const StartPage = defineComponent({
-  setup(props, ctx) {
+  setup() {
     onMounted(() => {
       localStorage.setItem("skipFeatures","yes")
     })
-    const refOverlayVisible = ref(false);
-    const onClickMenu = () => {
-      refOverlayVisible.value = !refOverlayVisible.value;
-    };
-    const click = () => {
-      console.log("hi");
-    };
+    const click = () => {};
     return () => {
       return (
         <MainLayout class={s.start_page}>
@@ -35,7 +29,6 @@ export const StartPage = defineComponent({
               <RouterLink to="/items">
                 <FloatButton></FloatButton>
               </RouterLink>
-              
             </>
           }}
         </MainLayout>

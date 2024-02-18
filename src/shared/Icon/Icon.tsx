@@ -14,7 +14,7 @@ export const Icon = defineComponent({
       type:Function as PropType<() => void>
     }
   },
-  setup(props, ctx) {
+  setup(props) {
     return () => {
       return (
         <svg class={s.icon} onClick={props.onClick}>

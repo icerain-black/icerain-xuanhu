@@ -8,7 +8,7 @@ import { useRoute, useRouter } from "vue-router";
 import { Dialog } from "vant";
 import { http } from "../../shared/http/http";
 export const TagEdit = defineComponent({
-  setup(props, ctx) {
+  setup() {
     const route = useRoute()
     const router = useRouter()
     const tagId = route.params.id

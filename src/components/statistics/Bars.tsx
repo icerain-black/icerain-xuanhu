@@ -1,4 +1,4 @@
-import { computed, defineComponent, PropType, reactive } from 'vue';
+import { defineComponent, PropType } from 'vue';
 import s from './Bars.module.scss';
 export const Bars = defineComponent({
   props: {
@@ -16,7 +16,7 @@ export const Bars = defineComponent({
     }[]>
     }
   },
-  setup: (props, context) => {
+  setup: (props) => {
     return () => (
       <div class={s.wrapper}>
         {(props.data && props.data.length > 0)? 

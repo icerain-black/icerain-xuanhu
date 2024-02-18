@@ -17,7 +17,6 @@ import { TagCreate } from '../components/tags/TagCreate';
 import { TagEdit } from '../components/tags/TagEdit';
 import { SignInPage } from '../views/SignInPage';
 import { StatisticsPage } from '../views/StatisticsPage';
-import { http } from '../shared/http/http';
 import { ComingSoon } from '../shared/ComingSoon/ComingSoon';
 
 const routes:RouteRecordRaw[] = [
@@ -29,7 +28,7 @@ const routes:RouteRecordRaw[] = [
     path: '/welcome', 
     component:Welcome,
     redirect:"/welcome/1",
-    beforeEnter(to,form,next){
+    beforeEnter(_,__,next){
       localStorage.getItem("skipFeatures") === "yes" ? next("/start") : next()
     },
     children:[

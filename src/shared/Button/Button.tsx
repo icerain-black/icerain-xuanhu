@@ -33,8 +33,8 @@ export const Button = defineComponent({
       }
     })
 
-    const onClick = () => {
-      props.onClick?.()
+    const onClick = (e:MouseEvent) => {
+      props.onClick?.(e)
       if (props.selfDisable) {
         selfDisable.value = true        
       }

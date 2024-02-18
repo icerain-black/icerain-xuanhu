@@ -11,7 +11,7 @@ import { useRoute, useRouter } from "vue-router";
 import { refreshMe } from "../shared/me/me";
 import { BackIcon } from "../shared/BackIcon/BackIcon";
 export const SignInPage = defineComponent({
-  setup(props, ctx) {
+  setup() {
     const formData = reactive({
       email:"616964@qq.com",
       code:"123456"

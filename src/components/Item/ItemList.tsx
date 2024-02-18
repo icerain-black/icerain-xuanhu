@@ -1,7 +1,6 @@
 import {defineComponent, reactive, ref, watchEffect} from "vue";
 import s from "./ItemList.module.scss"
 import { MainLayout } from "../../shared/MainLayout/MainLayout";
-import { Icon } from "../../shared/Icon/Icon";
 import { Tab, Tabs } from "../../shared/Tabs/Tabs";
 import { ItemSummary } from "./ItemSummary";
 import { Time } from "../../shared/time/time";
@@ -10,8 +9,7 @@ import { Form, FormItem } from "../../shared/Form/Form";
 import { Button } from "../../shared/Button/Button";
 import { OverlayIcon } from "../../shared/OverLay/Overlay";
 export const ItemList = defineComponent({
-  setup(props, ctx) {
-    
+  setup() {
     const tempCustomTime = reactive({
       start:new Time().format(),
       end:new Time().format()

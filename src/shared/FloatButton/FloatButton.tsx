@@ -7,9 +7,9 @@ export const FloatButton = defineComponent({
       type:String as PropType<IconProps["name"]>,
       default:"add"
     },
-    onClick:Function
+    onClick:Function as PropType<(payload:MouseEvent) => void>
   },
-  setup(props, ctx) {
+  setup(props) {
     return () => {
       return (
         <div class={s.wrapper} onClick={props.onClick}>

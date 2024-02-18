@@ -13,7 +13,7 @@ export const Form = defineComponent({
   setup(props, ctx) {
     return () => {
       return (
-        <form class={s.form} onSubmit={props.onSubmit}>
+        <form class={s.form} onSubmit={(e) => {props.onSubmit && props.onSubmit(e as SubmitEvent)}}>
           {ctx.slots.default?.()}
         </form>
       )

@@ -1,8 +1,7 @@
 import { defineComponent } from 'vue';
-import pig from '../../assets/icons/pig.svg';
 import { WelcomeLayout } from './WelcomeLayout';
 export const First = defineComponent({
-  setup: (props, context) => {
+  setup: () => {
     return () => (
       <WelcomeLayout>
         {{

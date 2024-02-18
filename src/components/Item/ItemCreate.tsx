@@ -1,4 +1,4 @@
-import { defineComponent, reactive, ref } from "vue";
+import { defineComponent, reactive } from "vue";
 import s from "./ItemCreate.module.scss";
 import { MainLayout } from "../../shared/MainLayout/MainLayout";
 import { Tab, Tabs } from "../../shared/Tabs/Tabs";
@@ -10,7 +10,7 @@ import { useRouter } from "vue-router";
 import { Dialog } from "vant";
 import { BackIcon } from "../../shared/BackIcon/BackIcon";
 export const ItemCreate = defineComponent({
-  setup(props, ctx) {
+  setup() {
     const formData = reactive({
       kind:"expenses",
       tag_ids:[],

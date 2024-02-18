@@ -2,7 +2,7 @@ import { defineComponent } from 'vue';
 import s from './Actions.module.scss';
 import { RouterLink } from 'vue-router';
 export const FirstActions = defineComponent({
-  setup: (props, context) => {
+  setup: () => {
     return () => (
       <div class={s.wrapper}>
         <RouterLink class={s.fake} to="/start" >跳过</RouterLink>
