@@ -1,5 +1,5 @@
 export interface FData {
-  [k:string]:string | number | null | undefined | FData
+  [k:string]:JSONValue
 }
 
 export type Rule<T> = {
@@ -7,8 +7,10 @@ export type Rule<T> = {
   message:string,
 } & (
   {type:"pattern",exp:RegExp} | 
-  {type:"require",require:boolean}
-  )
+  {type:"require",require:boolean} |
+  {type:"notEqual",value:JSONValue} |
+  {type:"requireSign",require:boolean}
+)
 
 export type Rules<T> = Rule<T>[]
 
@@ -32,6 +34,16 @@ export const validata = <T extends FData>(formData:T,rules:Rules<T>) => {
       }
     }else if (rule.type === "pattern") {
       if (value && !rule.exp.test(value?.toString())) {
+        error[key] = error[key] ?? []
+        error[key]?.push(message)
+      }
+    }else if (rule.type === "notEqual") {
+      if (rule.value === value) {
+        error[key] = error[key] ?? []
+        error[key]?.push(message)
+      }
+    }else if (rule.type === "requireSign") {
+      if (value && value.length === 0) {
         error[key] = error[key] ?? []
         error[key]?.push(message)
       }

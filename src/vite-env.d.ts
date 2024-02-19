@@ -11,11 +11,12 @@ type Tag = {
 }
 
 type Item = {
+  kind:"expenses" | "income"
   id: number,
   user_id: number,
   amount: number,
   note: string | null,
-  happened_at:string,
+  happen_at:string,
   tag_ids: number[],
   tags:{
     id: number,
