@@ -81,7 +81,7 @@ export const ItemCreate = defineComponent({
                   </Tabs>
                   <div class={s.inputPad_wrapper}>
                     <InputPad
-                      v-model:happenAt={formData.happen_at}
+                      v-model:happenAt={formData.happened_at}
                       v-model:amount={formData.amount}
                       onSumit={onSumit}
                     />

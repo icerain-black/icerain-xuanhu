@@ -13,14 +13,14 @@ export const TagEdit = defineComponent({
     const router = useRouter()
     const tagId = route.params.id
 
-    const onDeleteTag = async (options = {withItem:false}) => {
+    const onDeleteTag = async (options = {with_items:false}) => {
       Dialog.confirm({
         title: '警告',
-        message: options.withItem ? '请问是否要删除标签以及相关记账？' : '请问是否要删除标签？',
+        message: options.with_items ? '请问是否要删除标签以及相关记账？' : '请问是否要删除标签？',
       })
         .then(async () => {
         await http.delete(`/tags/${tagId}`,{
-          withItem:options.withItem.toString()
+          with_items:options.with_items.toString()
         },{_loading:true})
         router.back()
       })
@@ -41,7 +41,7 @@ export const TagEdit = defineComponent({
                     </div>
                     <div class={s.remove}>
                       <Button type="button" level="danger" class={s.remove_tag} onClick={() => onDeleteTag()}>删除标签</Button>
-                      <Button type="button" level="danger" class={s.remove_tag_and_items} onClick={() => onDeleteTag({withItem:true})}>删除标签和记账</Button>
+                      <Button type="button" level="danger" class={s.remove_tag_and_items} onClick={() => onDeleteTag({with_items:true})}>删除标签和记账</Button>
                     </div>
                   </div>
                 </TagFrom>

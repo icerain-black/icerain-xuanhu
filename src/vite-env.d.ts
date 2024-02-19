@@ -16,6 +16,7 @@ type Item = {
   user_id: number,
   amount: number,
   note: string | null,
+  happened_at:string,
   happen_at:string,
   tag_ids: number[],
   tags:{
@@ -44,7 +45,7 @@ type StatisticsResData<T> = {
 }
 
 type LineChartResData = {
-  happen_at: string,
+  happened_at: string,
   tag: string | null,
   amount: number
 }
