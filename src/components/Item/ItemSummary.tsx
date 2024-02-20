@@ -5,7 +5,8 @@ import { http } from '../../shared/http/http';
 import { Button } from '../../shared/Button/Button';
 import { Money } from '../../shared/Money/Money';
 import { DateTime } from '../../shared/DateTime/DateTime';
-import { useRouter } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
+import { useMeStore } from '../../stores/meStore';
 export const ItemSummary = defineComponent({
   props: {
     startDate: {
@@ -17,6 +18,8 @@ export const ItemSummary = defineComponent({
   },
   setup: (props) => {
     const router = useRouter()
+    const route = useRoute()
+    const meStore = useMeStore()
 
     const ref_page = ref(1)
     const refHasMore = ref(false);
@@ -54,7 +57,8 @@ export const ItemSummary = defineComponent({
       Object.assign(balanceData,res.data)
     }
 
-    onMounted(() => {
+    onMounted(async() => {
+      await meStore.mePromise?.catch(() => router.push(`/sign_in?return_to=${route.fullPath}`))
       fetchItems()
       fetchBalance()
     })
