@@ -2,8 +2,8 @@ import { defineComponent, PropType, ref } from 'vue';
 import { RouterLink, useRoute, useRouter } from 'vue-router';
 import { Icon } from '../Icon/Icon';
 import s from './Overlay.module.scss';
-import { mePromise } from '../me/me';
 import { Dialog } from 'vant';
+import { useMeStore } from '../../stores/meStore';
 export const Overlay = defineComponent({
   props: {
     onClose: {
@@ -13,6 +13,7 @@ export const Overlay = defineComponent({
   setup: (props) => {
     const route = useRoute()
     const router = useRouter()
+    const meStore = useMeStore()
 
     const close = () => {
       props.onClose?.()
@@ -29,7 +30,7 @@ export const Overlay = defineComponent({
 
     const userInfo = ref<User>()
 
-    mePromise?.then(res => {
+    meStore.mePromise?.then(res => {
       userInfo.value = res.data.resource
     })
     
