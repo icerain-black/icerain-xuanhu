@@ -23,7 +23,7 @@ app.use(pinia)
 
 const meStore = useMeStore()
 meStore.fetchMe()
-router.beforeEach(async (to:RouteLocationNormalized) => {
+router.beforeEach(async (to,from) => {
   for (const key in whiteList) {
     const value = whiteList[key]
     if (value === 'exact' && to.path === key) {
@@ -35,7 +35,7 @@ router.beforeEach(async (to:RouteLocationNormalized) => {
   }
   return meStore.mePromise!.then(
     () => true,
-    () => '/sign_in?return_to=' + to.path
+    () => '/sign_in?return_to=' + from.path
   )
 })
 
