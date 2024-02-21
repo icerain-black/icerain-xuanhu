@@ -9,8 +9,8 @@
     display: flex;
     justify-content: space-between;
 
-    .remove_tag,.remove_tag_and_items{
-      width: calc(50% - 8px);
+    .remove_tag_and_items{
+      width: calc(100%);
     }
   }
 }
