@@ -29,7 +29,6 @@ export const Tags = defineComponent({
     })
 
     const router = useRouter()
-    const route = useRoute()
 
     const timer = ref<number>()
     const currentTag = ref<HTMLDivElement>()
@@ -40,7 +39,6 @@ export const Tags = defineComponent({
         path,
         query:{
           kind:props.kind,
-          return_to:route.fullPath
         }
       })
     }

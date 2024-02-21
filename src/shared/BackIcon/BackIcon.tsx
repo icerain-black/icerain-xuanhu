@@ -2,14 +2,24 @@ import {defineComponent} from "vue";
 import { Icon } from "../Icon/Icon";
 import { useRoute, useRouter } from "vue-router";
 export const BackIcon = defineComponent({
-  setup() {
+  props:{
+    to:{
+      type:String
+    }
+  },
+  setup(props) {
     const route = useRoute()
     const router = useRouter()
     const onClick = () => {
-      if (route.query.return_to?.toString()) {
-        router.push(route.query.return_to?.toString())
+      if (props.to) {
+        router.push(props.to)
       }else{
-        router.back()
+        const {return_to} = route.query
+        if (return_to?.toString()) {
+          router.push(return_to?.toString())
+        }else{
+          router.back()
+        }
       }
     }
     return () => {
