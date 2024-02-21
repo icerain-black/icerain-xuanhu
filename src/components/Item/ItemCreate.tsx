@@ -62,7 +62,7 @@ export const ItemCreate = defineComponent({
       return (
         <MainLayout class={s.layout}>
           {{
-            icon: () => <BackIcon class={s.navIcon} to="/items"></BackIcon>,
+            icon: () => <BackIcon to="/items"></BackIcon>,
             title: () => "记一笔",
             default: () => (
               <>

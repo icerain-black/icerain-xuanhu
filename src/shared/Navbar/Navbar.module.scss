@@ -1,5 +1,6 @@
 .navbar{
   display: flex;
+  position: relative;
   justify-content: flex-start;
   align-items: center;
   background-image: linear-gradient(to bottom,var(--navbar-bg-start),var(--navbar-bg-end));

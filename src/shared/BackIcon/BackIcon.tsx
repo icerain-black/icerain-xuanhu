@@ -1,5 +1,6 @@
 import {defineComponent} from "vue";
 import { Icon } from "../Icon/Icon";
+import s from "./BackIcon.module.scss"
 import { useRoute, useRouter } from "vue-router";
 export const BackIcon = defineComponent({
   props:{
@@ -24,7 +25,7 @@ export const BackIcon = defineComponent({
     }
     return () => {
       return (
-        <Icon name="left" onClick={onClick}></Icon>
+        <Icon name="left" class={s.navIcon} onClick={onClick}></Icon>
       )
     }
   },
