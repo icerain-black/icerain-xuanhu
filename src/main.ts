@@ -4,7 +4,6 @@ import { App } from './App'
 import { router } from './config/routes'
 import '@svgstore';
 
-import { RouteLocationNormalized } from 'vue-router';
 import { createPinia } from 'pinia';
 
 

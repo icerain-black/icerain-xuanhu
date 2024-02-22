@@ -4,7 +4,7 @@ import { useTags } from "./useTags";
 import { Button } from "../Button/Button";
 import { Icon } from "../Icon/Icon";
 import { http } from "../http/http";
-import { RouterLink, useRoute, useRouter } from "vue-router";
+import { RouterLink, useRouter } from "vue-router";
 export const Tags = defineComponent({
   props:{
     kind:{
