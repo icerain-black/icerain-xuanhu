@@ -8,8 +8,11 @@ import { Overlay } from "vant";
 import { Form, FormItem } from "../shared/Form/Form";
 import { Button } from "../shared/Button/Button";
 import { Charts } from "../components/statistics/Charts";
+import { FloatButton } from "../shared/FloatButton/FloatButton";
+import { useRouter } from "vue-router";
 export const StatisticsPage = defineComponent({
   setup() {
+    const router = useRouter()
     const customTime = reactive({
       start:new Time().format(),
       end:new Time().format()
@@ -78,6 +81,7 @@ export const StatisticsPage = defineComponent({
                   </main>
                 </div>
               </Overlay>
+              <FloatButton onClick={() => router.push("/items/create")} class={s.float_button} iconName='add' />
               </>
             )
           }  
