@@ -45,7 +45,7 @@ type StatisticsResData<T> = {
 }
 
 type LineChartResData = {
-  happened_at: string,
+  happen_at: string,
   tag: string | null,
   amount: number
 }

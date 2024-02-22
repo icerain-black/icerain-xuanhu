@@ -30,7 +30,7 @@ export const Charts = defineComponent({
       const arr = Array.from({length:dayTime}).map((_,i) => {
         const timeStamp = new Time(props.startDate).add(i,"day").getTimeStamp()
         const item = lineChartData_before.value[lineChartData_before.value.length - 1]
-        const itemStamp = new Date(item?.happened_at).getTime()
+        const itemStamp = new Date(item?.happen_at).getTime()
         return timeStamp === itemStamp 
           ? [new Date(timeStamp).toISOString(),lineChartData_before.value.pop()?.amount]
           : [new Date(timeStamp).toISOString(),0]
@@ -46,7 +46,7 @@ export const Charts = defineComponent({
         kind:kind.value,
         group_by:"happen_at"
       },{_loading:true})
-
+      
       lineChartData_before.value = res.data.groups
     }
 
