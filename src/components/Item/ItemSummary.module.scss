@@ -67,8 +67,21 @@
   text-align: center;
 }
 
+.pig_wrapper{
+  padding: 160px 0;
+  >.pig{
+    width: 128px;
+    height: 128px;
+  }
+
+  >.link{
+    width: 100%;
+    padding: 16px;
+  }
+}
+
 .float_button{
   position: fixed;
   right: 20px;
-  bottom: 87x;
+  bottom: 87px;
 }

@@ -9,10 +9,10 @@ export const Center = defineComponent({
   },
   setup(props, ctx) {
     let directionMap = {
-      "|":"horizontal",
-      "-":"vertical",
-      horizontal:"horizontal",
-      vertical:"vertical",
+      "-":s.horizontal,
+      "|":s.vertical,
+      horizontal:s.horizontal,
+      vertical:s.vertical,
     }
     const extraClass = directionMap[props.direction]
     return () => {

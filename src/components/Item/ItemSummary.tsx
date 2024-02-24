@@ -5,8 +5,10 @@ import { http } from '../../shared/http/http';
 import { Button } from '../../shared/Button/Button';
 import { Money } from '../../shared/Money/Money';
 import { DateTime } from '../../shared/DateTime/DateTime';
-import { useRoute, useRouter } from 'vue-router';
+import { RouterLink, useRoute, useRouter } from 'vue-router';
 import { useMeStore } from '../../stores/meStore';
+import { Center } from '../../shared/Center/Centet';
+import { Icon } from '../../shared/Icon/Icon';
 export const ItemSummary = defineComponent({
   props: {
     startDate: {
@@ -78,35 +80,49 @@ export const ItemSummary = defineComponent({
           <li><span>支出</span><span>{balanceData.expenses / 100}</span></li>
           <li><span>净收入</span><span>{balanceData.balance / 100}</span></li>
         </ul>
-        <ol class={s.list}>
-          {ref_items.value.map(item => {
-            return (
-            <li id={item.id.toString()}>
-              <div class={s.sign}>
-                <span>{item.tags[0].sign}</span>
-              </div>
-              <div class={s.text}>
-                <div class={s.tagAndAmount}>
-                  <span class={s.tag}>{item.tags[0].name}</span>
-                  <span class={s.amount}>
-                    <Money value={item.amount}></Money>
-                  </span>
+        {ref_items.value.length === 0 ?
+          <Center direction='|' class={s.pig_wrapper}>
+            <Icon name="pig" class={s.pig} />
+            <p>账本里空空如也</p>
+            <div class={s.link}>
+              <RouterLink to="/items/create">
+                <Button class={s.button}>开始记账</Button>
+              </RouterLink>
+            </div>
+          </Center>
+        :
+        <>
+          <ol class={s.list}>
+            {ref_items.value.map(item => {
+              return (
+              <li id={item.id.toString()}>
+                <div class={s.sign}>
+                  <span>{item.tags[0].sign}</span>
                 </div>
-                <div class={s.time}>
-                  <DateTime time={item.happened_at}></DateTime>
+                <div class={s.text}>
+                  <div class={s.tagAndAmount}>
+                    <span class={s.tag}>{item.tags[0].name}</span>
+                    <span class={s.amount}>
+                      <Money value={item.amount}></Money>
+                    </span>
+                  </div>
+                  <div class={s.time}>
+                    <DateTime time={item.happened_at}></DateTime>
+                  </div>
                 </div>
-              </div>
-            </li>
-            )
-          })}
-        </ol>
-        <div class={s.more}>
-          {
-            refHasMore.value ? 
-            <Button onClick={fetchItems}>点击加载更多</Button> : 
-            <span>已经到底了</span>
-          }
-        </div>
+              </li>
+              )
+            })}
+          </ol>
+          <div class={s.more}>
+            {
+              refHasMore.value ? 
+              <Button onClick={fetchItems}>点击加载更多</Button> : 
+              <span>已经到底了</span>
+            }
+          </div>
+        </>
+        }
         <FloatButton onClick={() => router.push("/items/create")} class={s.float_button} iconName='add' />
       </div>
     )
