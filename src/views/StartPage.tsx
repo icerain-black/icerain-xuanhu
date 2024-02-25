@@ -36,3 +36,5 @@ export const StartPage = defineComponent({
     };
   },
 });
+
+export default StartPage

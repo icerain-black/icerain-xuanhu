@@ -57,3 +57,5 @@ export const Welcome = defineComponent({
     }
   },
 })
+
+export default Welcome

@@ -1,6 +1,4 @@
-import { ItemPage } from './../views/ItemPage';
 import { RouteRecordRaw, createRouter, createWebHashHistory } from "vue-router";
-import { Welcome } from "../views/Welcome";
 import { First } from "../components/welcome/First";
 import { Second } from "../components/welcome/Second"
 import { Thire } from "../components/welcome/Thire";
@@ -9,15 +7,10 @@ import { FirstActions } from "../components/welcome/FirstActions";
 import { SecondActions } from "../components/welcome/SecondActions";
 import { ThireActions } from "../components/welcome/ThireActions";
 import { FourthActions } from "../components/welcome/FourthActions";
-import { StartPage } from "../views/StartPage";
 import { ItemList } from '../components/Item/ItemList';
 import { ItemCreate } from '../components/Item/ItemCreate';
-import { TagPage } from '../views/TagPage';
 import { TagCreate } from '../components/tags/TagCreate';
 import { TagEdit } from '../components/tags/TagEdit';
-import { SignInPage } from '../views/SignInPage';
-import { StatisticsPage } from '../views/StatisticsPage';
-import { ComingSoon } from '../shared/ComingSoon/ComingSoon';
 
 const routes:RouteRecordRaw[] = [
   { 
@@ -26,7 +19,7 @@ const routes:RouteRecordRaw[] = [
   },
   {
     path: '/welcome', 
-    component:Welcome,
+    component:() => import("../views/Welcome"),
     redirect:"/welcome/1",
     beforeEnter(_,__,next){
       localStorage.getItem("skipFeatures") === "yes" ? next("/start") : next()
@@ -68,11 +61,11 @@ const routes:RouteRecordRaw[] = [
   },
   {
     path:"/start",
-    component:StartPage
+    component:() => import("../views/StartPage")
   },
   {
     path:"/items",
-    component:ItemPage,
+    component:() => import('./../views/ItemPage'),
     children:[
       {
         path:"",
@@ -86,7 +79,7 @@ const routes:RouteRecordRaw[] = [
   },
   {
     path:"/tags",
-    component:TagPage,
+    component:() => import('../views/TagPage'),
     children:[
       {
         path:"create",
@@ -100,17 +93,17 @@ const routes:RouteRecordRaw[] = [
   },
   {
     path:"/sign_in",
-    component:SignInPage  
+    component:() => import('../views/SignInPage')  
   },
   {
     path:"/statistics",
-    component:StatisticsPage
+    component:() => import('../views/StatisticsPage')
   },
   {
-    path: '/export', component: ComingSoon
+    path: '/export', component: () => import('../shared/ComingSoon/ComingSoon')
   },
   {
-    path: '/notify', component: ComingSoon
+    path: '/notify', component: () => import('../shared/ComingSoon/ComingSoon')
   }
 ]
 
