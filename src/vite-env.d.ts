@@ -1,5 +1,7 @@
 /// <reference types="vite/client" />
 
+declare var DEBUG:boolean
+
 
 type JSONValue = null | boolean | string | number | JSONValue[] | Record<string, JSONValue>
 
