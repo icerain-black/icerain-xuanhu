@@ -1,6 +1,6 @@
 import { defineComponent, PropType, ref } from 'vue';
 import { RouterLink, useRoute, useRouter } from 'vue-router';
-import { Icon } from '../Icon/Icon';
+import { Icon, IconProps } from '../Icon/Icon';
 import s from './Overlay.module.scss';
 import { Dialog } from 'vant';
 import { useMeStore } from '../../stores/meStore';
@@ -33,6 +33,13 @@ export const Overlay = defineComponent({
     meStore.mePromise?.then(res => {
       userInfo.value = res.data.resource
     })
+
+    const navList:{text:string,icon:IconProps["name"],to:string}[] = [
+      {text:"账本列表",icon:"pig",to:"/items"},
+      {text:"统计图表",icon:"charts",to:"/statistics"},
+      {text:"导出数据",icon:"export",to:"/export"},
+      {text:"记账提醒",icon:"notify",to:"/notify"}
+    ]
     
     return () => <>
       <div class={s.mask} onClick={close}></div>
@@ -49,34 +56,19 @@ export const Overlay = defineComponent({
               <p>点击这里登录</p>
             </RouterLink>
           }
-          
-          </section>
+        </section>
         <nav>
           <ul class={s.action_list}>
-            <li>
-              <RouterLink to="/items" class={s.action}>
-                <Icon name="pig" class={s.icon} />
-                <span>账本列表</span>
-              </RouterLink>
-            </li>
-            <li>
-              <RouterLink to="/statistics" class={s.action}>
-                <Icon name="charts" class={s.icon} />
-                <span>统计图表</span>
-              </RouterLink>
-            </li>
-            <li>
-              <RouterLink to="/export" class={s.action}>
-                <Icon name="export" class={s.icon}/>
-                <span>导出数据</span>
-              </RouterLink>
-            </li>
-            <li>
-              <RouterLink to="/notify" class={s.action}>
-                <Icon name="notify" class={s.icon}/>
-                <span>记账提醒</span>
-              </RouterLink>
-            </li>
+            {navList.map(item => {
+              return (
+              <li>
+                <RouterLink to={item.to} class={[s.action,route.fullPath === item.to && s.isLink]}>
+                  <Icon name={item.icon} class={s.icon}/>
+                  <span>{item.text}</span>
+                </RouterLink>
+              </li>
+              )
+            })}
           </ul>
         </nav>
       </div>
