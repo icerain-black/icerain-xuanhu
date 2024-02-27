@@ -10,10 +10,13 @@ import { useRouter } from "vue-router";
 import { Dialog } from "vant";
 import { BackIcon } from "../../shared/BackIcon/BackIcon";
 import { FormError, Rules, hasError, validata } from "../../shared/validate/validata";
+import { useUserKindStore } from "../../stores/userKindStore";
 export const ItemCreate = defineComponent({
   setup() {
+    const userKindStore = useUserKindStore()
+
     const formData = reactive<Partial<Item>>({
-      kind:"expenses",
+      kind:userKindStore.kind,
       tag_ids:[],
       happen_at:new Date().toISOString(),
       amount:0
