@@ -6,6 +6,7 @@ import { PieChart } from './PieChart';
 import { Bars } from './Bars';
 import { http } from '../../shared/http/http';
 import { Time } from '../../shared/time/time';
+import { useUserKindStore } from '../../stores/userKindStore';
 
 const DAY = 24 * 60 * 60 * 1000
 
@@ -19,7 +20,8 @@ export const Charts = defineComponent({
     }
   },
   setup: (props) => {
-    const kind = ref('expenses')
+    const userKindStore = useUserKindStore()
+    const kind = ref(userKindStore.chartKind)
 
     const lineChartData_before = ref<StatisticsResData<LineChartResData>["groups"]>([])
     const lineChartData = computed(() => {
@@ -80,7 +82,10 @@ export const Charts = defineComponent({
       pieChartData_before.value = res.data
     }
     onMounted(fetchPieChartData)
-    watch(() => kind.value,fetchPieChartData)
+    watch(() => kind.value,() => {
+      userKindStore.changeChartKind(kind.value)
+      fetchPieChartData
+    })
 
     return () => (
       <div class={s.wrapper}>
