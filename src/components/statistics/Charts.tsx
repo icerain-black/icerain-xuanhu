@@ -52,9 +52,6 @@ export const Charts = defineComponent({
       lineChartData_before.value = res.data.groups
     }
 
-    onMounted(fetchLineChartData)
-    watch(() => kind.value,fetchLineChartData)
-
     const pieChartData_before = ref<StatisticsResData<PieChartResData>>()
     const pieChartData = computed(() => 
       pieChartData_before.value?.groups.map(item => {
@@ -81,10 +78,14 @@ export const Charts = defineComponent({
 
       pieChartData_before.value = res.data
     }
-    onMounted(fetchPieChartData)
-    watch(() => kind.value,() => {
+    onMounted(() => {
+      fetchLineChartData()
+      fetchPieChartData()
+    })
+    watch(() => [kind.value,props.startDate,props.endDate],() => {
       userKindStore.changeChartKind(kind.value)
-      fetchPieChartData
+      fetchLineChartData()
+      fetchPieChartData()
     })
 
     return () => (

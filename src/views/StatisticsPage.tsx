@@ -18,6 +18,11 @@ export const StatisticsPage = defineComponent({
       end:new Time().format()
     })
 
+    const temp_customTime = reactive({
+      start:new Time().format(),
+      end:new Time().format()
+    })
+
     const time = new Time()
 
     const itemTimeList = [
@@ -38,6 +43,8 @@ export const StatisticsPage = defineComponent({
     const onSubmitCustomTime = (e: Event) => {
       e.preventDefault()
       refOverlayVisible.value = false
+      customTime.start = temp_customTime.start
+      customTime.end = temp_customTime.end
     }
 
     return () => {
@@ -69,8 +76,8 @@ export const StatisticsPage = defineComponent({
                   </header>
                   <main>
                     <Form onSubmit={onSubmitCustomTime}>
-                      <FormItem label='开始时间' v-model:value={customTime.start} type='date' />
-                      <FormItem label='结束时间' v-model:value={customTime.end} type='date' />
+                      <FormItem label='开始时间' v-model:value={temp_customTime.start} type='date' />
+                      <FormItem label='结束时间' v-model:value={temp_customTime.end} type='date' />
                       <FormItem>
                         <div class={s.actions}>
                           <Button type="button" onClick={() => refOverlayVisible.value = false} class={s.button}>取消</Button>
