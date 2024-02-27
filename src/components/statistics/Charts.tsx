@@ -17,6 +17,10 @@ export const Charts = defineComponent({
     },
     endDate: {
       type: String as PropType<string>,
+    },
+    isCustom:{
+      type:Boolean,
+      default:false
     }
   },
   setup: (props) => {
@@ -79,8 +83,10 @@ export const Charts = defineComponent({
       pieChartData_before.value = res.data
     }
     onMounted(() => {
-      fetchLineChartData()
-      fetchPieChartData()
+      if (!props.isCustom) {
+        fetchLineChartData()
+        fetchPieChartData()  
+      }
     })
     watch(() => [kind.value,props.startDate,props.endDate],() => {
       userKindStore.changeChartKind(kind.value)

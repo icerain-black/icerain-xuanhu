@@ -66,7 +66,7 @@ export const StatisticsPage = defineComponent({
                   <Charts startDate={itemTimeList[2].start.format()} endDate={itemTimeList[2].end.format()}/>
                 </Tab>
                 <Tab kind="自定义时间">
-                  <Charts startDate={customTime.start} endDate={customTime.end}/>
+                  <Charts startDate={customTime.start} endDate={customTime.end} isCustom={true}/>
                 </Tab>
               </Tabs>
               <Overlay show={refOverlayVisible.value} class={s.overlay} >

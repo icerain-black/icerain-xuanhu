@@ -16,6 +16,10 @@ export const ItemSummary = defineComponent({
     },
     endDate: {
       type: String as PropType<string>,
+    },
+    isCustom:{
+      type:Boolean,
+      default:false
     }
   },
   setup: (props) => {
@@ -61,8 +65,10 @@ export const ItemSummary = defineComponent({
 
     onMounted(async() => {
       await meStore.mePromise?.catch(() => router.push(`/sign_in?return_to=${route.fullPath}`))
-      fetchItems()
-      fetchBalance()
+      if (!props.isCustom) {
+        fetchItems()
+        fetchBalance()  
+      }
     })
 
     watch(()=>[props.startDate,props.endDate], ()=>{
