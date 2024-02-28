@@ -5,7 +5,7 @@ export const Tabs = defineComponent({
   props:{
     selected:{
       type:String
-    },
+    }
   },
   emits:["update:selected"],
   setup(props, ctx) {
@@ -15,7 +15,9 @@ export const Tabs = defineComponent({
       "income":"收入"
     }
     const changeKind = (kind:Item["kind"]) => {
-      userKindStore.changeKind(kind)
+      if (kind === "expenses" || kind === "income") {
+        userKindStore.changeKind(kind)        
+      }
       ctx.emit("update:selected",kind)
     }
 

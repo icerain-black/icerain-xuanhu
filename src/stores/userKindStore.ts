@@ -18,7 +18,6 @@ export const useUserKindStore = defineStore<string,UserKindStoreState,{},UserKin
 
   actions:{
     changeKind(kind){
-      
       this.kind = kind
     },
     changeChartKind(chartsKind){
