@@ -24,6 +24,7 @@ export const Overlay = defineComponent({
         message:"您真的要退出登录吗?"
       }).then(() => {
         localStorage.removeItem("jwt")
+        meStore.$reset()
         router.push("/sign_in")    
       })
     }

@@ -32,10 +32,10 @@ router.beforeEach(async (to,from) => {
       return true
     }
   }
-  return meStore.mePromise!.then(
+  return meStore.mePromise?.then(
     () => true,
     () => '/sign_in?return_to=' + from.path
-  )
+  ) || '/sign_in?return_to=' + from.path
 })
 
 app.use(router)
