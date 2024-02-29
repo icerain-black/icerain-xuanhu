@@ -7,10 +7,13 @@
   padding: 16px;
 }
 
-.pig{
-  width: 128px;
-  height: 128px;
-  &_wrapper{
-    padding: 120px 0;
+.icon_wrapper{
+  margin-top: 25vh;
+  .fox{
+    width: 128px;
+    height: 128px;
+    &_wrapper{
+      padding: 120px 0;
+    }
   }
 }

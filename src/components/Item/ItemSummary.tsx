@@ -88,7 +88,7 @@ export const ItemSummary = defineComponent({
         </ul>
         {ref_items.value.length === 0 ?
           <Center direction='|' class={s.pig_wrapper}>
-            <Icon name="pig" class={s.pig} />
+            <Icon name="fox" class={s.fox} />
             <p>账本里空空如也</p>
             <div class={s.link}>
               <RouterLink to="/items/create">

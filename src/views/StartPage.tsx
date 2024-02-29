@@ -18,10 +18,10 @@ export const StartPage = defineComponent({
         <MainLayout class={s.start_page}>
           {{
             icon:() => <OverlayIcon></OverlayIcon>,
-            title:() => "山竹记账",
+            title:() => "玄狐记账",
             default:() => <>
               <Center class={s.pig_wrapper}>
-                <Icon name="pig" class={s.pig}></Icon>
+                <Icon name="fox" class={s.fox}></Icon>
               </Center>
               <RouterLink to="/items">
                 <Button onClick={click} class={s.button}>开始记账</Button>

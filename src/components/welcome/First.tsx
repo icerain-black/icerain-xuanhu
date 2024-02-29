@@ -5,7 +5,7 @@ export const First = defineComponent({
     return () => (
       <WelcomeLayout>
         {{
-          icon:() => <svg><use xlinkHref='#pig'></use></svg>,
+          icon:() => <svg><use xlinkHref='#fox'></use></svg>,
           title:() => <h2>会挣钱<br/>还要会省钱</h2>,
         }}
       </WelcomeLayout>

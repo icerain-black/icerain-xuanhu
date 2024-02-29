@@ -48,7 +48,7 @@ export const ItemList = defineComponent({
       return (
         <MainLayout>{
           {
-            title:() => "山竹记账",
+            title:() => "玄狐记账",
             icon:() => <OverlayIcon></OverlayIcon>,
             default:() => (
               <>

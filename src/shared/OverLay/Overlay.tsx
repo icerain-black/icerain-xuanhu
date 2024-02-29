@@ -35,7 +35,7 @@ export const Overlay = defineComponent({
     })
 
     const navList:{text:string,icon:IconProps["name"],to:string}[] = [
-      {text:"账本列表",icon:"pig",to:"/items"},
+      {text:"账本列表",icon:"fox",to:"/items"},
       {text:"统计图表",icon:"charts",to:"/statistics"},
       {text:"导出数据",icon:"export",to:"/export"},
       {text:"记账提醒",icon:"notify",to:"/notify"}
